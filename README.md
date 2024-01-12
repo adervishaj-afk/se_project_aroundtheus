@@ -21,4 +21,4 @@ In addition, web queries were another tool used to redefine rules for classes in
 
 Images for this project were exported directly from Figma and optimized on [here](https://tinypng.com/), so your project loads faster.
 
-[Link to video overview](https://drive.google.com/drive/u/1/quota)
+[Link to video overview](https://drive.google.com/drive/home)
