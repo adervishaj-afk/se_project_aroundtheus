@@ -10,7 +10,7 @@
   border-radius: 50%;
   object-fit: cover;
   background-position: center;
-  margin: 3.8px 26px 3.8px 23px;
+  margin: 3.8px 26px 3.8px 0;
 }
 
 .profile__info {
@@ -63,6 +63,10 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 880px;
 }
 
 .profile__add-button {
@@ -87,10 +91,16 @@
   }
   .profile__info {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     width: 100%;
+  }
+
+  .profile__image {
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .profile__title {
@@ -99,25 +109,24 @@
 
   .profile__description {
     font-size: 14px;
-  }
-
-  .profile__edit-button {
-    column-gap: 10px;
-  }
-
-  .profile__edit-button {
-    margin-top: 4px;
-    margin-left: 10px;
-  }
-
-  .profile__description {
+    max-width: 270px;
     width: 100%;
     text-align: center;
   }
 
+  .profile__edit-button {
+    column-gap: 10px;
+    height: 18px;
+    width: 18px;
+  }
+
   .profile__add-button {
+    background: transparent url(../images/add-sign-no-box.png) center no-repeat;
     margin-top: 36px;
     margin-left: auto;
     margin-right: auto;
+    height: 50px;
+    max-width: 282px;
+    width: 100%;
   }
 }
