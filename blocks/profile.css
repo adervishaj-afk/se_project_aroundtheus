@@ -10,7 +10,7 @@
   border-radius: 50%;
   object-fit: cover;
   background-position: center;
-  margin: 3.8px 26px 3.8px 0;
+  margin: 0 30px 0 0;
 }
 
 .profile__info {
@@ -101,10 +101,12 @@
   .profile__image {
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 30px;
   }
 
   .profile__title {
     font-size: 22px;
+    max-width: 250px;
   }
 
   .profile__description {

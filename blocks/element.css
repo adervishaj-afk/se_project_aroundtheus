@@ -46,6 +46,7 @@
   border: none;
   box-sizing: content-box;
   transition: opacity 0.3s ease-in-out;
+  flex-shrink: 0;
 }
 
 .element__like-button:hover {
