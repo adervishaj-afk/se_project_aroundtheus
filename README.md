@@ -21,6 +21,6 @@ In addition, web queries were another tool used to redefine rules for classes in
 
 Images for this project were exported directly from Figma and optimized on [here](https://tinypng.com/), so your project loads faster.
 
-[Link to project GitHub page](https://github.com/adervishaj-afk/se_project_aroundtheus)
+[Link to project GitHub page](https://adervishaj-afk.github.io/se_project_aroundtheus/)
 
-[Link to video overview](https://drive.google.com/drive/home)
+[Link to video overview](https://drive.google.com/file/d/19S1Gos4ry2HlBiqkWV2jOO4Cwq8FjiOy/view?usp=drive_link)
