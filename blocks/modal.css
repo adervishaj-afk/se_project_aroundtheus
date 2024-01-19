@@ -1,0 +1,132 @@
+.modal {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  display: flex;
+}
+
+.modal__opened {
+  display: none;
+}
+
+.modal__container {
+  background-color: white;
+  margin: auto;
+  padding: 36px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.modal__close {
+  background-image: url("../images/close-icon.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  position: absolute;
+  bottom: calc(100% + 5px);
+  left: calc(100% + 5px);
+  padding: 19px;
+}
+
+.modal__title {
+  max-width: 330px;
+  color: #000;
+  font-family: Inter, Arial, Sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  margin-top: 0;
+  margin-bottom: 54px;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  max-width: 430px;
+}
+
+.modal__form_title {
+  border: none;
+  padding-bottom: 13.3px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  color: #000;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 30px;
+}
+
+.modal__form_description {
+  border: none;
+  padding-bottom: 13.3px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  color: #000;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 48px;
+}
+
+.modal__button {
+  padding: 0;
+  border: none;
+  width: 358px;
+  height: 50.152px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  background: #000;
+  color: #fff;
+  text-align: center;
+  font-family: Inter, Arial, Sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+@media screen and (max-width: 540px) {
+  .modal__container {
+    max-width: 282px;
+    padding: 25px 22px;
+  }
+
+  .modal__close {
+    left: unset;
+    right: 0;
+    bottom: calc(100% + 14px);
+    width: 26px;
+    height: 26px;
+  }
+
+  .modal__form {
+    max-width: 238px;
+  }
+
+  .modal__title {
+    font-size: 18px;
+    margin-bottom: 75px;
+  }
+
+  .modal__form_description {
+    margin-bottom: 45px;
+  }
+
+  .modal__button {
+    max-width: 238px;
+    font-size: 14px;
+  }
+}
