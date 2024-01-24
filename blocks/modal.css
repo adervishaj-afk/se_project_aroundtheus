@@ -6,11 +6,11 @@
   bottom: 0;
   left: 0;
   z-index: 999;
-  display: flex;
+  display: none;
 }
 
 .modal__opened {
-  display: none;
+  display: flex;
 }
 
 .modal__container {
