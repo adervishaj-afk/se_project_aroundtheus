@@ -23,81 +23,22 @@
             class="profile__image"
           />
           <div class="profile__info">
-            <h1 class="profile__title">Jacques-Cousteau</h1>
+            <h1 class="profile__title" id="profile-info-title">
+              Jacques-Cousteau
+            </h1>
             <button
               class="profile__edit-button"
               id="profile-edit-button"
               type="button"
             ></button>
-            <p class="profile__description">Explorer</p>
+            <p class="profile__description" id="profile-info-description">
+              Explorer
+            </p>
           </div>
           <button class="profile__add-button" type="button"></button>
         </section>
         <section class="page__section">
-          <ul class="elements">
-            <li class="element">
-              <img
-                src="./images/yosemite.jpg"
-                alt="yosemite"
-                class="element__image"
-              />
-              <div class="element__description">
-                <h2 class="element__title">Yosemite Valley</h2>
-                <button class="element__like-button" type="button"></button>
-              </div>
-            </li>
-            <li class="element">
-              <img
-                src="./images/lake-louise.jpg"
-                alt="lake louis"
-                class="element__image"
-              />
-              <div class="element__description">
-                <h2 class="element__title">Lake Louis</h2>
-                <button class="element__like-button" type="button"></button>
-              </div>
-            </li>
-            <li class="element">
-              <img
-                src="./images/bald-mountains.jpg"
-                alt="bald-mountains"
-                class="element__image"
-              />
-              <div class="element__description">
-                <h2 class="element__title">Bald Mountains</h2>
-                <button class="element__like-button" type="button"></button>
-              </div>
-            </li>
-            <li class="element">
-              <img
-                src="./images/latemar.jpg"
-                alt="latemar"
-                class="element__image"
-              />
-              <div class="element__description">
-                <h2 class="element__title">Latemar</h2>
-                <button class="element__like-button" type="button"></button>
-              </div>
-            </li>
-            <li class="element">
-              <img
-                src="./images/vanoise.jpg"
-                alt="vanoise"
-                class="element__image"
-              />
-              <div class="element__description">
-                <h2 class="element__title">Vanoise National Park</h2>
-                <button class="element__like-button" type="button"></button>
-              </div>
-            </li>
-            <li class="element">
-              <img src="./images/lago.jpg" alt="lago" class="element__image" />
-              <div class="element__description">
-                <h2 class="element__title">Lago di Braies</h2>
-                <button class="element__like-button" type="button"></button>
-              </div>
-            </li>
-          </ul>
+          <ul class="elements" id="el-card-list"></ul>
         </section>
         <footer class="footer page__section">
           <p class="footer__description">© 2022 Around The U.S</p>
@@ -108,17 +49,17 @@
         <div class="modal__container">
           <button class="modal__close" id="profile-close-edit-button"></button>
           <p class="modal__title">Edit Profile</p>
-          <form class="modal__form">
+          <form class="modal__form" id="modal-form">
             <input
               type="text"
-              id="title"
+              id="profile-modal-title"
               name="title"
               class="modal__form modal__form_title"
               placeholder="Name"
             />
             <input
               type="text"
-              id="description"
+              id="profile-modal-description"
               name="description"
               class="modal__form modal__form_description"
               placeholder="Description"
@@ -128,6 +69,15 @@
         </div>
       </div>
 
+      <template id="elementCard">
+        <li class="element">
+          <img class="element__image" alt="" src="" id="el-card-image" />
+          <div class="element__description" id="el-card-description">
+            <h3 class="element__title" id="el-card-title"></h3>
+            <button class="element__like-button" type="button"></button>
+          </div>
+        </li>
+      </template>
       <script src="./scripts/index.js"></script>
     </div>
   </body>

@@ -35,11 +35,54 @@ const profileEditModal = document.querySelector("#profile-edit-modal");
 const profileCloseEditButton = document.querySelector(
   "#profile-close-edit-button"
 );
+const profileInfoTitle = document.querySelector("#profile-info-title");
+const profileInfoDescription = document.querySelector(
+  "#profile-info-description"
+);
+const profileModalNameInput = document.querySelector("#profile-modal-title");
+const profileModalDescriptionInput = document.querySelector(
+  "#profile-modal-description"
+);
+const profileModalForm = profileEditModal.querySelector("#modal-form");
+const elementCardTemplate =
+  document.querySelector("#elementCard").content.firstElementChild;
+const elCardList = document.querySelector("#el-card-list");
+
+//There's space in the name/description
+//placeholder when the modal opens - needs correcting
+function closePopop() {
+  profileEditModal.classList.toggle("modal__opened");
+}
 
 profileEditButton.addEventListener("click", () => {
-  profileEditModal.classList.add("modal__opened");
+  profileModalNameInput.value = profileInfoTitle.textContent;
+  profileModalDescriptionInput.value = profileInfoDescription.textContent;
+  closePopop();
 });
 
 profileCloseEditButton.addEventListener("click", () => {
-  profileEditModal.classList.remove("modal__opened");
+  profileEditModal.classList.toggle("modal__opened");
+});
+
+function handleProfileFormSubmit(evt) {
+  evt.preventDefault();
+  profileInfoTitle.textContent = profileModalNameInput.value;
+  profileInfoDescription.textContent = profileModalDescriptionInput.value;
+  closePopop();
+}
+profileModalForm.addEventListener("submit", handleProfileFormSubmit);
+
+function getCardElement(cardData) {
+  const cardElement = elementCardTemplate.cloneNode(true);
+  const elCardImage = elementCardTemplate.querySelector("#el-card-image");
+  const elCardTitle = elementCardTemplate.querySelector("#el-card-title");
+  elCardImage.setAttribute("src", cardData.link);
+  elCardImage.setAttribute("alt", cardData.name);
+  elCardTitle.textContent = cardData.name;
+  return cardElement;
+}
+
+initialCards.forEach((cardData) => {
+  const cardElement = getCardElement(cardData);
+  elCardList.prepend(cardElement);
 });
