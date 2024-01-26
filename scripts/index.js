@@ -50,32 +50,33 @@ const elCardList = document.querySelector("#el-card-list");
 
 //There's space in the name/description
 //placeholder when the modal opens - needs correcting
-function closePopop() {
+function togglePopup() {
   profileEditModal.classList.toggle("modal__opened");
 }
 
 profileEditButton.addEventListener("click", () => {
-  profileModalNameInput.value = profileInfoTitle.textContent;
-  profileModalDescriptionInput.value = profileInfoDescription.textContent;
-  closePopop();
+  profileModalNameInput.value = profileInfoTitle.textContent.trim();
+  profileModalDescriptionInput.value =
+    profileInfoDescription.textContent.trim();
+  togglePopup();
 });
 
 profileCloseEditButton.addEventListener("click", () => {
-  profileEditModal.classList.toggle("modal__opened");
+  togglePopup();
 });
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileInfoTitle.textContent = profileModalNameInput.value;
   profileInfoDescription.textContent = profileModalDescriptionInput.value;
-  closePopop();
+  togglePopup();
 }
 profileModalForm.addEventListener("submit", handleProfileFormSubmit);
 
 function getCardElement(cardData) {
   const cardElement = elementCardTemplate.cloneNode(true);
-  const elCardImage = elementCardTemplate.querySelector("#el-card-image");
-  const elCardTitle = elementCardTemplate.querySelector("#el-card-title");
+  const elCardImage = cardElement.querySelector("#el-card-image");
+  const elCardTitle = cardElement.querySelector("#el-card-title");
   elCardImage.setAttribute("src", cardData.link);
   elCardImage.setAttribute("alt", cardData.name);
   elCardTitle.textContent = cardData.name;
