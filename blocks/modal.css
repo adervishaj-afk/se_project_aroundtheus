@@ -55,7 +55,7 @@
   max-width: 430px;
 }
 
-.modal__form-input_type_title {
+.modal__form_type_input-title {
   border: none;
   padding-bottom: 13.3px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -68,7 +68,7 @@
   margin-bottom: 30px;
 }
 
-.modal__form-input_type_description {
+.modal__form_type_input-description {
   border: none;
   padding-bottom: 13.3px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
