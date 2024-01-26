@@ -9,7 +9,7 @@
   display: none;
 }
 
-.modal__opened {
+.modal_opened {
   display: flex;
 }
 
@@ -34,7 +34,6 @@
   position: absolute;
   bottom: calc(100% + 5px);
   left: calc(100% + 5px);
-  padding: 19px;
 }
 
 .modal__title {
@@ -55,7 +54,7 @@
   max-width: 430px;
 }
 
-.modal__form_type_input-title {
+.modal__form-input {
   border: none;
   padding-bottom: 13.3px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -68,16 +67,7 @@
   margin-bottom: 30px;
 }
 
-.modal__form_type_input-description {
-  border: none;
-  padding-bottom: 13.3px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  color: #000;
-  font-family: Inter, Arial, sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+.modal__form-input:nth-child(2) {
   margin-bottom: 48px;
 }
 

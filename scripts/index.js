@@ -48,10 +48,8 @@ const elementCardTemplate =
   document.querySelector("#elementCard").content.firstElementChild;
 const elCardList = document.querySelector("#el-card-list");
 
-//There's space in the name/description
-//placeholder when the modal opens - needs correcting
 function togglePopup() {
-  profileEditModal.classList.toggle("modal__opened");
+  profileEditModal.classList.toggle("modal_opened");
 }
 
 profileEditButton.addEventListener("click", () => {
