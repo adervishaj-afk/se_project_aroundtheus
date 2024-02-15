@@ -96,14 +96,37 @@
               class="modal__form-input"
               placeholder="Image URL"
             />
-            <button type="submit" class="modal__button">Save</button>
+            <button type="submit" class="modal__button">Create</button>
           </form>
+        </div>
+      </div>
+
+      <!-- Add Card Popout Modal-->
+
+      <div class="modal" id="element-popout-modal">
+        <div class="modal__popout">
+          <button
+            class="modal__close"
+            id="element-close-popout-button"
+          ></button>
+          <img
+            class="modal__element-popout"
+            alt="modal-image"
+            src=""
+            id="modal-image"
+          />
+          <p class="modal__element-text" id="modal-text"></p>
         </div>
       </div>
 
       <template id="elementCard">
         <li class="element">
           <img class="element__image" alt="" src="" id="el-card-image" />
+          <button
+            class="element__trash-button"
+            type="button"
+            id="element-trash-button"
+          ></button>
           <div class="element__description" id="el-card-description">
             <h3 class="element__title" id="el-card-title"></h3>
             <button

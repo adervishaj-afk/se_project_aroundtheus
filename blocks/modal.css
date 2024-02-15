@@ -19,6 +19,33 @@
   padding: 36px;
   border-radius: 10px;
   position: relative;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 0.5s, opacity 1s linear;
+}
+
+.modal__container:active {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0s;
+}
+
+/* Element Modal Popout */
+.modal__popout {
+  margin: auto;
+  position: relative;
+}
+
+.modal__element-popout {
+  max-width: 75vw;
+  max-height: 75vh;
+  object-fit: cover;
+}
+
+.modal__element-text {
+  color: white;
+  font-size: 12px;
+  font-family: Inter, arial, sans-serif;
 }
 
 .modal__close {

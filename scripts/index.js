@@ -71,6 +71,12 @@ const profileAddUrlInput = document.querySelector("#profile-modal-add-URL");
 const elementCardTemplate =
   document.querySelector("#elementCard").content.firstElementChild;
 const elCardList = document.querySelector("#el-card-list");
+const elImageModal = document.querySelector("#element-popout-modal");
+const modalImage = document.querySelector("#modal-image");
+const modalTitle = document.querySelector("#modal-text");
+const elImageCloseButton = elImageModal.querySelector(
+  "#element-close-popout-button"
+);
 
 /*--------------------------------------------------------------------------------------- */
 /*                                        FUNCTIONS                                       */
@@ -92,14 +98,31 @@ function getCardElement(cardData) {
   elCardImage.setAttribute("alt", cardData.name);
   elCardTitle.textContent = cardData.name;
   const likeButton = cardElement.querySelector("#element-like-button");
+  const elTrashButton = cardElement.querySelector("#element-trash-button");
 
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("element__like-button_active");
   });
+
+  elTrashButton.addEventListener("click", (evt) => {
+    deleteCard(evt.target);
+  });
+
+  //card image popout
+  elCardImage.addEventListener("click", () => {
+    modalImage.src = cardData.link;
+    modalTitle.textContent = cardData.name; //not working
+    openModal(elImageModal);
+  });
+
   return cardElement;
 }
 
-function renderCardData(cardData) {
+function deleteCard(cardElement) {
+  cardElement.closest(".element").remove();
+}
+
+function renderCardData(cardData, elCardList) {
   const cardElement = getCardElement(cardData);
   elCardList.prepend(cardElement);
 }
@@ -150,9 +173,14 @@ profileCloseAddButton.addEventListener("click", () => {
   closeModal(profileAddModal);
 });
 
+elImageCloseButton.addEventListener("click", () => {
+  closeModal(elImageModal);
+});
+
 profileEditModalForm.addEventListener("submit", handleProfileEditFormSubmit);
 profileAddModalForm.addEventListener("submit", handleProfileAddFormSubmit);
 
+//Generate cards
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
   renderCardData(cardData, elCardList);
