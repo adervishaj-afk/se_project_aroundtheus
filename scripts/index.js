@@ -55,10 +55,10 @@ const profileEditModalForm = profileEditModal.querySelector(
 );
 
 // Add Button
-const profileAddButton = document.querySelector("#profile-add-button");
+const addButton = document.querySelector("#profile-add-button");
 const addModal = document.querySelector("#profile-add-modal");
 const closeAddButton = document.querySelector("#profile-close-add-button");
-const profileAddModalForm = addModal.querySelector("#modal-profile-add-form");
+const addModalForm = addModal.querySelector("#modal-profile-add-form");
 
 const addTitleInput = document.querySelector("#profile-modal-add-title");
 const addUrlInput = document.querySelector("#profile-modal-add-URL");
@@ -156,10 +156,7 @@ profileEditButton.addEventListener("click", () => {
   openModal(profileEditModal);
 });
 
-profileAddButton.addEventListener("click", () => {
-  profileModalNameInput.value = profileInfoTitle.textContent.trim();
-  profileModalDescriptionInput.value =
-    profileInfoDescription.textContent.trim();
+addButton.addEventListener("click", () => {
   openModal(addModal);
 });
 
@@ -176,7 +173,7 @@ imageCloseButton.addEventListener("click", () => {
 });
 
 profileEditModalForm.addEventListener("submit", handleProfileEditFormSubmit);
-profileAddModalForm.addEventListener("submit", handleProfileAddFormSubmit);
+addModalForm.addEventListener("submit", handleProfileAddFormSubmit);
 
 //Generate cards
 initialCards.forEach((cardData) => {
