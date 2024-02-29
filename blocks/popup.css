@@ -1,0 +1,14 @@
+.popup__button_disabled {
+}
+
+.popup__input_type_error {
+  font: Inter;
+  line-height: 15px;
+  font-size: 12px;
+  border-width: 1px;
+  border-color: #ff0000;
+}
+
+.popup__error_visible {
+  visibility: visible;
+}
