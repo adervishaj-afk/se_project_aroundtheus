@@ -1,12 +1,12 @@
 function showInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
-  const errorMessageEl = formEl.querySelectorAll(`#${inputEl.id}-error`);
+  const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
   inputEl.classList.add(inputErrorClass);
-  errorMessageEl.textContent = inputEl.validationMessage;
   errorMessageEl.classList.add(errorClass);
+  errorMessageEl.textContent = inputEl.validationMessage;
 }
 
 function hideInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
-  const errorMessageEl = formEl.querySelectorAll(`#${inputEl.id}-error`);
+  const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
   inputEl.classList.remove(inputErrorClass);
   errorMessageEl.textContent = "";
   errorMessageEl.classList.remove(errorClass);
@@ -14,18 +14,35 @@ function hideInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
 
 function checkInputValidity(formEl, inputEl, option) {
   if (!inputEl.validity.valid) {
-    showInputError(formEl, inputEl, option);
-  } else {
-    hideInputError(formEl, inputEl, option);
+    return showInputError(formEl, inputEl, option);
   }
+  hideInputError(formEl, inputEl, option);
+}
+
+function toggleButtonAccess(inputEl, submitButton, { inactiveButtonClass }) {
+  let failedCheck = false;
+  inputEl.forEach((inputEl) => {
+    if (!inputEl.validity.valid) {
+      validityCheck = true;
+    }
+  });
+
+  if (failedCheck) {
+    submitButton.classList.add(inactiveButtonClass);
+    return (submitButton.disabled = true);
+  }
+  submitButton.classList.remove(inactiveButtonClass);
+  submitButton.disabled = false;
 }
 
 function setEventListener(formEl, option) {
   const { inputSelector } = option;
+  const submitButton = formEl.querySelector(".modal__button");
   const inputEls = [...formEl.querySelectorAll(inputSelector)];
   inputEls.forEach((inputEl) => {
     inputEl.addEventListener("input", (e) => {
       checkInputValidity(formEl, inputEl, option);
+      toggleButtonAccess(inputEls, submitButton, option);
     });
   });
 }
@@ -42,9 +59,9 @@ function enableValidation(option) {
 }
 
 const config = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
+  formSelector: ".modal__form",
+  inputSelector: ".modal__form-input",
+  submitButtonSelector: ".modal__button",
   inactiveButtonClass: "popup__button_disabled",
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__error_visible",

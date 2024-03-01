@@ -88,6 +88,7 @@
   font-weight: 400;
   line-height: normal;
   margin-bottom: 30px;
+  position: relative;
 }
 
 .modal__form-input:nth-child(2) {

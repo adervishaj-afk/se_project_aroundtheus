@@ -84,7 +84,13 @@
               class="popup__error"
               id="profile-edit-modal-description-error"
             ></span>
-            <button type="submit" class="modal__button">Save</button>
+            <button
+              type="submit"
+              class="modal__button popup__button_disabled"
+              disabled
+            >
+              Save
+            </button>
           </form>
         </div>
       </div>
@@ -102,7 +108,11 @@
               name="title"
               class="modal__form-input"
               placeholder="Title"
+              minlength="1"
+              maxlength="30"
+              required
             />
+            <span class="popup__error" id="profile-modal-add-title"></span>
             <input
               type="text"
               id="profile-modal-add-URL"
@@ -110,6 +120,7 @@
               class="modal__form-input"
               placeholder="Image URL"
             />
+            <span class="popup__error" id="profile-modal-add-URL"></span>
             <button type="submit" class="modal__button">Create</button>
           </form>
         </div>

@@ -175,6 +175,35 @@ imageCloseButton.addEventListener("click", () => {
 profileEditModalForm.addEventListener("submit", handleProfileEditFormSubmit);
 addModalForm.addEventListener("submit", handleProfileAddFormSubmit);
 
+profileEditModal.addEventListener("click", (e) => {
+  if (e.target.id !== "#modal-profile-edit-form");
+  closeModal(profileEditModal);
+});
+
+addModal.addEventListener("click", (e) => {
+  if (e.target.id !== "#modal-profile-add-form");
+  closeModal(addModal);
+});
+
+imageModal.addEventListener("click", (e) => {
+  if (e.target.id !== "#element-popout-modal");
+  closeModal(imageModal);
+});
+
+//Escape Key Event Listeners for Edit, Add and Iamge Modal's
+
+profileEditModal.addEventListener("keydown", () => {
+  if (e.key == "Escape") {
+    closeModal(profileEditModal);
+  }
+});
+
+profileEditModal.addEventListener("keypress", (e) => {
+  if (e.key === "Escape") {
+    closeModal(profileEditModal);
+  }
+});
+
 //Generate cards
 initialCards.forEach((cardData) => {
   renderCard(cardData, cardList);
