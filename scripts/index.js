@@ -79,11 +79,26 @@ const imageCloseButton = imageModal.querySelector(
 /*--------------------------------------------------------------------------------------- */
 
 function openModal(modal) {
-  modal.classList.add("modal_opened");
+  modal.classList.add("modal__opened");
+  //Escape Key Event Listeners
+  document.addEventListener("keydown", closeByEscape);
 }
 
 function closeModal(modal) {
-  modal.classList.remove("modal_opened");
+  modal.classList.remove("modal__opened");
+  //Escape Key Event Listeners
+  modal.removeEventListener("keydown", closeByEscape);
+}
+
+function closeModalClickOut(e) {
+  if (e.target.classList.contains("modal__opened")) closeModal(e.target);
+}
+
+function closeByEscape(e) {
+  const modal = document.querySelector(".modal__opened");
+  if (e.key === "Escape") {
+    closeModal(modal);
+  }
 }
 
 function getCardElement(cardData) {
@@ -175,34 +190,11 @@ imageCloseButton.addEventListener("click", () => {
 profileEditModalForm.addEventListener("submit", handleProfileEditFormSubmit);
 addModalForm.addEventListener("submit", handleProfileAddFormSubmit);
 
-profileEditModal.addEventListener("click", (e) => {
-  if (e.target.id !== "#modal-profile-edit-form");
-  closeModal(profileEditModal);
-});
+profileEditModal.addEventListener("mousedown", closeModalClickOut);
 
-addModal.addEventListener("click", (e) => {
-  if (e.target.id !== "#modal-profile-add-form");
-  closeModal(addModal);
-});
+addModal.addEventListener("mousedown", closeModalClickOut);
 
-imageModal.addEventListener("click", (e) => {
-  if (e.target.id !== "#element-popout-modal");
-  closeModal(imageModal);
-});
-
-//Escape Key Event Listeners for Edit, Add and Iamge Modal's
-
-profileEditModal.addEventListener("keydown", () => {
-  if (e.key == "Escape") {
-    closeModal(profileEditModal);
-  }
-});
-
-profileEditModal.addEventListener("keypress", (e) => {
-  if (e.key === "Escape") {
-    closeModal(profileEditModal);
-  }
-});
+imageModal.addEventListener("mousedown", closeModalClickOut);
 
 //Generate cards
 initialCards.forEach((cardData) => {

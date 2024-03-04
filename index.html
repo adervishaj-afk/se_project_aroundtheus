@@ -56,41 +56,39 @@
           <button class="modal__close" id="profile-close-edit-button"></button>
           <p class="modal__title">Edit Profile</p>
           <form class="modal__form" id="modal-profile-edit-form">
-            <input
-              type="text"
-              id="profile-edit-modal-title"
-              name="title"
-              class="modal__form-input"
-              placeholder="Name"
-              minlength="2"
-              maxlength="40"
-              required
-            />
-            <span
-              class="popup__error"
-              id="profile-edit-modal-title-error"
-            ></span>
-            <input
-              type="text"
-              id="profile-edit-modal-description"
-              name="description"
-              class="modal__form-input"
-              placeholder="Description"
-              minlength="2"
-              maxlength="200"
-              required
-            />
-            <span
-              class="popup__error"
-              id="profile-edit-modal-description-error"
-            ></span>
-            <button
-              type="submit"
-              class="modal__button popup__button_disabled"
-              disabled
-            >
-              Save
-            </button>
+            <label class="modal__label">
+              <input
+                type="text"
+                id="profile-edit-modal-title"
+                name="title"
+                class="modal__form-input"
+                placeholder="Name"
+                minlength="2"
+                maxlength="40"
+                required
+              />
+              <span
+                class="modal__error"
+                id="profile-edit-modal-title-error"
+              ></span>
+            </label>
+            <label class="modal__label">
+              <input
+                type="text"
+                id="profile-edit-modal-description"
+                name="description"
+                class="modal__form-input"
+                placeholder="Description"
+                minlength="2"
+                maxlength="200"
+                required
+              />
+              <span
+                class="modal__error"
+                id="profile-edit-modal-description-error"
+              ></span>
+            </label>
+            <button type="submit" class="modal__button" disabled>Save</button>
           </form>
         </div>
       </div>
@@ -102,26 +100,42 @@
           <button class="modal__close" id="profile-close-add-button"></button>
           <p class="modal__title">New Place</p>
           <form class="modal__form" id="modal-profile-add-form">
-            <input
-              type="text"
-              id="profile-modal-add-title"
-              name="title"
-              class="modal__form-input"
-              placeholder="Title"
-              minlength="1"
-              maxlength="30"
-              required
-            />
-            <span class="popup__error" id="profile-modal-add-title"></span>
-            <input
-              type="text"
-              id="profile-modal-add-URL"
-              name="Image URL"
-              class="modal__form-input"
-              placeholder="Image URL"
-            />
-            <span class="popup__error" id="profile-modal-add-URL"></span>
-            <button type="submit" class="modal__button">Create</button>
+            <label class="modal__label">
+              <input
+                type="text"
+                id="profile-modal-add-title"
+                name="title"
+                class="modal__form-input"
+                placeholder="Title"
+                minlength="1"
+                maxlength="30"
+                required
+              />
+              <span
+                class="modal__error"
+                id="profile-modal-add-title-error"
+              ></span>
+            </label>
+            <label class="modal__label">
+              <input
+                type="url"
+                id="profile-modal-add-URL"
+                name="Image URL"
+                class="modal__form-input"
+                placeholder="Image URL"
+                required
+              />
+              <span class="modal__error" id="profile-modal-add-URL-error"
+                >Enter a valid URL address</span
+              >
+            </label>
+            <button
+              type="submit"
+              class="modal__button modal__button_disabled"
+              disabled
+            >
+              Create
+            </button>
           </form>
         </div>
       </div>
