@@ -19,17 +19,17 @@ function checkInputValidity(formEl, inputEl, option) {
   hideInputError(formEl, inputEl, option);
 }
 
-function toggleButtonAccess(inputEl, submitButton, { inactiveButtonClass }) {
-  let failedCheck = false;
-  inputEl.forEach((inputEl) => {
-    if (!inputEl.validity.valid) {
-      failedCheck = true;
-    }
-  });
+const checkFormValidity = (inputs) =>
+  inputs.every((input) => input.validity.valid);
 
-  if (failedCheck) {
+function toggleButtonAccess(inputEl, submitButton, { inactiveButtonClass }) {
+  const isFormValid = checkFormValidity(inputEl);
+  console.log(isFormValid);
+
+  if (!isFormValid) {
     submitButton.classList.add(inactiveButtonClass);
-    return (submitButton.disabled = true);
+    submitButton.disabled = true;
+    return;
   }
   submitButton.classList.remove(inactiveButtonClass);
   submitButton.disabled = false;
@@ -37,7 +37,7 @@ function toggleButtonAccess(inputEl, submitButton, { inactiveButtonClass }) {
 
 function setEventListener(formEl, option) {
   const { inputSelector } = option;
-  const submitButton = formEl.querySelector(".modal__button");
+  const submitButton = formEl.querySelector(option.submitButtonSelector);
   const inputEls = [...formEl.querySelectorAll(inputSelector)];
   inputEls.forEach((inputEl) => {
     inputEl.addEventListener("input", (e) => {
