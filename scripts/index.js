@@ -79,24 +79,24 @@ const imageCloseButton = imageModal.querySelector(
 /*--------------------------------------------------------------------------------------- */
 
 function openModal(modal) {
-  modal.classList.add("modal__opened");
+  modal.classList.add("modal_opened");
   //Escape Key Event Listeners
   document.addEventListener("keydown", closeByEscape);
 }
 
 function closeModal(modal) {
-  modal.classList.remove("modal__opened");
+  modal.classList.remove("modal_opened");
   //Escape Key Event Listeners
   modal.removeEventListener("keydown", closeByEscape);
 }
 
 function closeModalClickOut(e) {
-  if (e.target.classList.contains("modal__opened")) closeModal(e.target);
+  if (e.target.classList.contains("modal_opened")) closeModal(e.target);
 }
 
 function closeByEscape(e) {
-  const modal = document.querySelector(".modal__opened");
   if (e.key === "Escape") {
+    const modal = document.querySelector(".modal_opened");
     closeModal(modal);
   }
 }
