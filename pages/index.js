@@ -1,3 +1,5 @@
+import Card from "./Card.js";
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -101,6 +103,7 @@ function closeByEscape(e) {
   }
 }
 
+/*
 function getCardElement(cardData) {
   const cardElement = elementCardTemplate.cloneNode(true);
   const cardImage = cardElement.querySelector("#el-card-image");
@@ -108,6 +111,7 @@ function getCardElement(cardData) {
   cardImage.setAttribute("src", cardData.link);
   cardImage.setAttribute("alt", cardData.name);
   cardTitle.textContent = cardData.name;
+
   const likeButton = cardElement.querySelector("#element-like-button");
   const trashButton = cardElement.querySelector("#element-trash-button");
 
@@ -129,15 +133,18 @@ function getCardElement(cardData) {
 
   return cardElement;
 }
+*/
 
 function deleteCard(cardElement) {
   cardElement.closest(".element").remove();
 }
 
+/*
 function renderCard(cardData, cardList) {
   const cardElement = getCardElement(cardData);
   cardList.prepend(cardElement);
 }
+*/
 
 /*--------------------------------------------------------------------------------------- */
 /*                                        EVENT HANDLERS                                  */
@@ -200,3 +207,15 @@ imageModal.addEventListener("mousedown", closeModalClickOut);
 initialCards.forEach((cardData) => {
   renderCard(cardData, cardList);
 });
+
+//class restructuring
+
+const card = new Card(initialCards, "#elementCard", handleImageClick);
+card.getView();
+
+const handleImageClick = (cardData) => {
+  modalImage.src = cardData.link;
+  modalImage.alt = cardData.name;
+  modalTitle.textContent = cardData.name;
+  openModal(imageModal);
+};
