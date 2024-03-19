@@ -1,4 +1,4 @@
-import Card from "./Card.js";
+import Card from "../components/Card";
 
 const initialCards = [
   {
@@ -133,13 +133,11 @@ function getCardElement(cardData) {
 
   return cardElement;
 }
-*/
 
 function deleteCard(cardElement) {
   cardElement.closest(".element").remove();
 }
 
-/*
 function renderCard(cardData, cardList) {
   const cardElement = getCardElement(cardData);
   cardList.prepend(cardElement);
@@ -219,3 +217,12 @@ const handleImageClick = (cardData) => {
   modalTitle.textContent = cardData.name;
   openModal(imageModal);
 };
+
+const profileEditFormValidator = new FormValidator(
+  config,
+  profileEditModalForm
+);
+profileEditFormValidator.enableValidation();
+
+const addModalFormValidator = new FormValidator(config, addModalForm);
+addModalFormValidator.enableValidation();

@@ -37,24 +37,27 @@ export default class Card {
     this._cardElement = null;
   }
 
+  _handleImageClick(link, name) {
+    modalImage.src = link;
+    modalImage.alt = name;
+    modalTitle.textContent = name;
+    openModal(imageModal);
+  }
+
   getView() {
     //create card template
     this._cardElement = document
       .querySelector(this._cardSelector)
       .content()
-      .querySelector(".element")
+      .firstElementChild()
       .cloneNode(true);
     //add card image, alt text, and title
-    this._cardElement
-      .querySelector("#el-card-image")
-      .setAttribute("src", this._link);
-    this._cardElement
-      .querySelector("#el-card-image")
-      .setAttribute("alt", this._name);
+    this._cardElement.querySelector("#el-card-image").src = this._link;
+    this._cardElement.querySelector("#el-card-image").alt = this._name;
     this._cardElement.querySelector("#el-card-title").textContent = this._name;
 
     //
-    this._setEventListeners();
-    return cardElement;
+    this._setEventListeners(this._cardElement);
+    return this._cardElement;
   }
 }
