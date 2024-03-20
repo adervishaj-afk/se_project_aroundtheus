@@ -11,13 +11,13 @@ export default class Card {
     this._cardElement
       .querySelector("#element-like-button")
       .addEventListener("click", () => {
-        _handleLikeButton();
+        this._handleLikeButton();
       });
     //deleteButton element + eventListener
     this._cardElement
       .querySelector("#element-trash-button")
       .addEventListener("click", () => {
-        _handleDeleteButton();
+        this._handleDeleteButton();
       });
     this._cardElement
       .querySelector("#el-card-image")
@@ -37,19 +37,11 @@ export default class Card {
     this._cardElement = null;
   }
 
-  _handleImageClick(link, name) {
-    modalImage.src = link;
-    modalImage.alt = name;
-    modalTitle.textContent = name;
-    openModal(imageModal);
-  }
-
   getView() {
     //create card template
     this._cardElement = document
       .querySelector(this._cardSelector)
-      .content()
-      .firstElementChild()
+      .content.querySelector(".element")
       .cloneNode(true);
     //add card image, alt text, and title
     this._cardElement.querySelector("#el-card-image").src = this._link;
