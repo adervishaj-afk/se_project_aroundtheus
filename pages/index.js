@@ -67,8 +67,7 @@ const addTitleInput = document.querySelector("#profile-modal-add-title");
 const addUrlInput = document.querySelector("#profile-modal-add-URL");
 
 //Card Elements
-const elementCardTemplate =
-  document.querySelector("#elementCard").content.firstElementChild;
+//const elementCardTemplate = document.querySelector("#elementCard").content.firstElementChild;
 const cardList = document.querySelector("#el-card-list");
 const imageModal = document.querySelector("#element-popout-modal");
 const modalImage = document.querySelector("#modal-image");
@@ -81,6 +80,15 @@ const imageCloseButton = imageModal.querySelector(
 /*                                        FUNCTIONS                                       */
 /*--------------------------------------------------------------------------------------- */
 
+function createCard(item) {
+  const card = new Card(item, "#elementCard", handleImageClick);
+  return card.getView();
+}
+
+function renderCard(cardElement) {
+  cardList.prepend(cardElement);
+}
+
 function openModal(modal) {
   modal.classList.add("modal_opened");
   //Escape Key Event Listeners
@@ -90,7 +98,7 @@ function openModal(modal) {
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
   //Escape Key Event Listeners
-  modal.removeEventListener("keydown", closeByEscape);
+  document.removeEventListener("keydown", closeByEscape);
 }
 
 function closeModalClickOut(e) {
@@ -103,47 +111,6 @@ function closeByEscape(e) {
     closeModal(modal);
   }
 }
-
-/*
-function getCardElement(cardData) {
-  const cardElement = elementCardTemplate.cloneNode(true);
-  const cardImage = cardElement.querySelector("#el-card-image");
-  const cardTitle = cardElement.querySelector("#el-card-title");
-  cardImage.setAttribute("src", cardData.link);
-  cardImage.setAttribute("alt", cardData.name);
-  cardTitle.textContent = cardData.name;
-
-  const likeButton = cardElement.querySelector("#element-like-button");
-  const trashButton = cardElement.querySelector("#element-trash-button");
-
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("element__like-button_active");
-  });
-
-  trashButton.addEventListener("click", (evt) => {
-    deleteCard(evt.target);
-  });
-
-  //card image popout
-  cardImage.addEventListener("click", () => {
-    modalImage.src = cardData.link;
-    modalImage.alt = cardData.name;
-    modalTitle.textContent = cardData.name;
-    openModal(imageModal);
-  });
-
-  return cardElement;
-}
-
-function deleteCard(cardElement) {
-  cardElement.closest(".element").remove();
-}
-
-function renderCard(cardData, cardList) {
-  const cardElement = getCardElement(cardData);
-  cardList.prepend(cardElement);
-}
-*/
 
 /*--------------------------------------------------------------------------------------- */
 /*                                        EVENT HANDLERS                                  */
@@ -158,10 +125,9 @@ function handleProfileEditFormSubmit(evt) {
 
 function handleProfileAddFormSubmit(evt) {
   evt.preventDefault();
-
   const newCard = { name: addTitleInput.value, link: addUrlInput.value };
-  const card = new Card(newCard, "#elementCard", handleImageClick);
-  cardList.append(card.getView());
+  const cardElement = createCard(newCard);
+  renderCard(cardElement);
   closeModal(addModal);
   evt.target.reset();
 }
@@ -207,8 +173,8 @@ const handleImageClick = (cardData) => {
 };
 
 initialCards.forEach((cardData) => {
-  const cardElement = new Card(cardData, "#elementCard", handleImageClick);
-  cardList.append(cardElement.getView());
+  const cardView = createCard(cardData);
+  renderCard(cardView);
 });
 
 //class restructuring

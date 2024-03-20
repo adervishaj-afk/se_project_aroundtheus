@@ -49,7 +49,7 @@ export default class Card {
     this._cardElement.querySelector("#el-card-title").textContent = this._name;
 
     //
-    this._setEventListeners(this._cardElement);
+    this._setEventListeners();
     return this._cardElement;
   }
 }
