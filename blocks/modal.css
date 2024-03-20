@@ -94,7 +94,7 @@
 }
 
 .modal__form-input:last-of-type {
-  margin-bottom: 48px;
+  margin-bottom: 36px;
 }
 
 .modal__button {
@@ -153,7 +153,10 @@
 @media screen and (max-width: 540px) {
   .modal__container {
     max-width: 282px;
+    max-height: 322px;
     padding: 25px 22px;
+    margin-left: 22px;
+    margin-right: 22px;
   }
 
   .modal__close {
@@ -179,6 +182,7 @@
 
   .modal__button {
     max-width: 238px;
+    margin-bottom: 25px;
     font-size: 14px;
   }
 }
