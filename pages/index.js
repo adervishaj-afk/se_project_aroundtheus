@@ -130,6 +130,7 @@ function handleProfileAddFormSubmit(evt) {
   renderCard(cardElement);
   closeModal(addModal);
   evt.target.reset();
+  addModalFormValidator.resetValidation();
 }
 
 /*--------------------------------------------------------------------------------------- */
