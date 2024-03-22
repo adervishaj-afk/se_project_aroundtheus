@@ -83,4 +83,12 @@ export default class FormValidator {
     });
     this._toggleButtonState(inputList, buttonElement);
   }
+
+  disableSubmitButton = () => {
+    const buttonElement = this._formElement.querySelector(
+      this._submitButtonSelector
+    );
+    buttonElement.classList.add(this._inactiveButtonClass);
+    buttonElement.disabled = true;
+  };
 }

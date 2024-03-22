@@ -129,8 +129,8 @@ function handleProfileAddFormSubmit(evt) {
   const cardElement = createCard(newCard);
   renderCard(cardElement);
   closeModal(addModal);
-  evt.target.reset();
-  addModalFormValidator.resetValidation();
+  addModalForm.reset();
+  addModalFormValidator.disableSubmitButton();
 }
 
 /*--------------------------------------------------------------------------------------- */
