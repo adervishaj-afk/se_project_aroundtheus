@@ -1,0 +1,79 @@
+.element {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.element__image {
+  width: 282px;
+  height: 282px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.element__description {
+  display: flex;
+  background-color: white;
+  color: black;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-left: 20px;
+  padding-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.element__title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  color: #000;
+  font-family: Inter, arial, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+}
+
+.element__like-button {
+  background: transparent url(../images/like-icon.svg) center no-repeat;
+  width: 21px;
+  height: 18px;
+  border: none;
+  box-sizing: content-box;
+  transition: opacity 0.3s ease-in-out;
+  flex-shrink: 0;
+}
+
+.element__like-button_active {
+  background-image: url(../images/heart-active.svg);
+}
+
+.element__like-button:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.element__trash-button {
+  background: url(../images/trash-icon.svg);
+  opacity: 1;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  border: none;
+  left: calc(100% - 30px);
+  top: 20px;
+  height: 19px;
+  width: 18px;
+}
+
+.element__trash-button:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Around the U.S: Sprint #3 at Tripleten" />
+    <meta name="author" content="Arlind: Software Engineering Student" />
+    <meta name="keywords" content="responsive web design" />
+    <title>Around the U.S</title>
+  </head>
+  <body class="page">
+    <div class="page__content">
+      <header class="header page__section">
+        <img
+          src="<%=require('./src/images/logo.svg')%>"
+          alt="logo image"
+          class="header__logo"
+        />
+      </header>
+      <main>
+        <section class="profile page__section">
+          <img
+            src="<%=require('./src/images/jacques-cousteau.jpg')%>"
+            alt="avatar"
+            class="profile__image"
+          />
+          <div class="profile__info">
+            <h1 class="profile__title" id="profile-info-title">
+              Jacques-Cousteau
+            </h1>
+            <button
+              class="profile__edit-button"
+              id="profile-edit-button"
+              type="button"
+            ></button>
+            <p class="profile__description" id="profile-info-description">
+              Explorer
+            </p>
+          </div>
+          <button
+            class="profile__add-button"
+            type="button"
+            id="profile-add-button"
+          ></button>
+        </section>
+        <section class="page__section">
+          <ul class="elements" id="el-card-list"></ul>
+        </section>
+        <footer class="footer page__section">
+          <p class="footer__description">© 2022 Around The U.S</p>
+        </footer>
+      </main>
+
+      <!-- Edit Modal-->
+
+      <div class="modal" id="profile-edit-modal">
+        <div class="modal__container">
+          <button class="modal__close" id="profile-close-edit-button"></button>
+          <p class="modal__title">Edit Profile</p>
+          <form
+            name="profile-edit-form"
+            class="modal__form"
+            id="modal-profile-edit-form"
+          >
+            <label class="modal__label">
+              <input
+                type="text"
+                id="profile-edit-modal-title"
+                name="title"
+                class="modal__form-input"
+                placeholder="Name"
+                minlength="2"
+                maxlength="40"
+                required
+              />
+              <span
+                class="modal__error"
+                id="profile-edit-modal-title-error"
+              ></span>
+            </label>
+            <label class="modal__label">
+              <input
+                type="text"
+                id="profile-edit-modal-description"
+                name="description"
+                class="modal__form-input"
+                placeholder="Description"
+                minlength="2"
+                maxlength="200"
+                required
+              />
+              <span
+                class="modal__error"
+                id="profile-edit-modal-description-error"
+              ></span>
+            </label>
+            <button type="submit" class="modal__button" disabled>Save</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Add Card Modal-->
+
+      <div class="modal" id="profile-add-modal">
+        <div class="modal__container">
+          <button class="modal__close" id="profile-close-add-button"></button>
+          <p class="modal__title">New Place</p>
+          <form
+            name="profile-add-form"
+            class="modal__form"
+            id="modal-profile-add-form"
+          >
+            <label class="modal__label">
+              <input
+                type="text"
+                id="profile-modal-add-title"
+                name="title"
+                class="modal__form-input"
+                placeholder="Title"
+                minlength="1"
+                maxlength="30"
+                required
+              />
+              <span
+                class="modal__error"
+                id="profile-modal-add-title-error"
+              ></span>
+            </label>
+            <label class="modal__label">
+              <input
+                type="url"
+                id="profile-modal-add-URL"
+                name="Image URL"
+                class="modal__form-input"
+                placeholder="Image URL"
+                required
+              />
+              <span class="modal__error" id="profile-modal-add-URL-error"
+                >Enter a valid URL address</span
+              >
+            </label>
+            <button
+              type="submit"
+              class="modal__button modal__button_disabled"
+              disabled
+            >
+              Create
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Add Card Popout Modal-->
+
+      <div class="modal" id="element-popout-modal">
+        <div class="modal__popout">
+          <button
+            class="modal__close"
+            id="element-close-popout-button"
+          ></button>
+          <img
+            class="modal__element-popout"
+            alt="modal-image"
+            src=""
+            id="modal-image"
+          />
+          <p class="modal__element-text" id="modal-text"></p>
+        </div>
+      </div>
+
+      <template id="elementCard">
+        <li class="element">
+          <img class="element__image" alt="" src="" id="el-card-image" />
+          <button
+            class="element__trash-button"
+            type="button"
+            id="element-trash-button"
+          ></button>
+          <div class="element__description" id="el-card-description">
+            <h3 class="element__title" id="el-card-title"></h3>
+            <button
+              class="element__like-button"
+              type="button"
+              id="element-like-button"
+            ></button>
+          </div>
+        </li>
+      </template>
+    </div>
+  </body>
+</html>
