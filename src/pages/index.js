@@ -6,6 +6,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section";
 import UserInfo from "../components/UserInfo.js";
+//import Constants from "../utils/Constants.js";
 
 const initialCards = [
   {
@@ -81,7 +82,6 @@ const modalTitle = document.querySelector("#modal-text");
 const imageCloseButton = imageModal.querySelector(
   "#element-close-popout-button"
 );
-
 //------------------------------------------------ Refactoring Code
 
 function createCard(item) {
