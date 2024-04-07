@@ -37,13 +37,15 @@ const config = {
 */
 
 const profileEditFormValidator = new FormValidator(
-  "#profile-edit-modal",
+  formConfig,
+  //"#profile-edit-modal"
   variables.profileEditModalForm
 );
 profileEditFormValidator.enableValidation();
 
 const addModalFormValidator = new FormValidator(
-  "#profile-add-modal",
+  formConfig,
+  //"#profile-add-modal"
   variables.addModalForm
 );
 addModalFormValidator.enableValidation();
@@ -64,10 +66,10 @@ variables.profileEditButton.addEventListener("click", () => {
   editFormPopup.open();
 });
 
-const addFormPopup = new PopupWithForm("#profile-add-modal", (formData) => {
+const addFormPopup = new PopupWithForm("#profile-add-modal", () => {
   const newCard = {
-    name: formData.addTitleInput.value,
-    link: formData.addUrlInput.value,
+    name: variables.addTitleInput.value,
+    link: variables.addUrlInput.value,
   };
   renderCard(newCard);
 });
