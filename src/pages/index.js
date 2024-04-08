@@ -40,36 +40,23 @@ const addModalFormValidator = new FormValidator(
 addModalFormValidator.enableValidation();
 //------------------------------------------------------------------------------
 const editFormPopup = new PopupWithForm("#profile-edit-modal", (formData) => {
-  variables.profileInfoTitle.textContent = formData.title;
-  variables.profileInfoDescription.textContent = formData.description;
-  /*
   user.setUserInfo({
     name: formData.title,
-    job: formData.description
+    job: formData.description,
   });
-  */
 });
 
 editFormPopup.setEventListeners();
 
-/*
 const user = new UserInfo({
-  nameSelector: variables.profileInfoTitle,
-  jobSelector: variables.profileInfoDescription,
+  nameSelector: "#profile-info-title",
+  jobSelector: "#profile-info-description",
 });
-*/
 
 variables.profileEditButton.addEventListener("click", () => {
-  variables.profileModalNameInput.value =
-    variables.profileInfoTitle.textContent.trim();
-
-  variables.profileModalDescriptionInput.value =
-    variables.profileInfoDescription.textContent.trim();
-  /*
-    const userInfo = user.getUserInfo();
+  const userInfo = user.getUserInfo();
   variables.profileModalNameInput.value = userInfo.name.trim();
   variables.profileModalDescriptionInput.value = userInfo.job.trim();
-  */
   editFormPopup.open();
 });
 
