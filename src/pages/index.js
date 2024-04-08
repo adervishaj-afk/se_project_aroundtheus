@@ -25,17 +25,6 @@ const handleImageClick = (cardData) => {
   popupImage.setEventListeners();
 };
 
-/*
-const config = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__form-input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
-*/
-
 const profileEditFormValidator = new FormValidator(
   formConfig,
   //"#profile-edit-modal"
@@ -53,9 +42,22 @@ addModalFormValidator.enableValidation();
 const editFormPopup = new PopupWithForm("#profile-edit-modal", (formData) => {
   variables.profileInfoTitle.textContent = formData.title;
   variables.profileInfoDescription.textContent = formData.description;
+  /*
+  user.setUserInfo({
+    name: formData.title,
+    job: formData.description
+  });
+  */
 });
 
 editFormPopup.setEventListeners();
+
+/*
+const user = new UserInfo({
+  nameSelector: variables.profileInfoTitle,
+  jobSelector: variables.profileInfoDescription,
+});
+*/
 
 variables.profileEditButton.addEventListener("click", () => {
   variables.profileModalNameInput.value =
@@ -63,6 +65,11 @@ variables.profileEditButton.addEventListener("click", () => {
 
   variables.profileModalDescriptionInput.value =
     variables.profileInfoDescription.textContent.trim();
+  /*
+    const userInfo = user.getUserInfo();
+  variables.profileModalNameInput.value = userInfo.name.trim();
+  variables.profileModalDescriptionInput.value = userInfo.job.trim();
+  */
   editFormPopup.open();
 });
 
@@ -76,10 +83,8 @@ const addFormPopup = new PopupWithForm("#profile-add-modal", () => {
 
 addFormPopup.setEventListeners();
 variables.addButton.addEventListener("click", () => {
-  variables.profileModalNameInput.value =
-    variables.profileInfoTitle.textContent.trim();
-  variables.profileModalDescriptionInput.value =
-    variables.profileInfoDescription.textContent.trim();
+  variables.addModalForm.reset();
+  addModalFormValidator.resetValidation();
   addFormPopup.open();
 });
 
