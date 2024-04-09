@@ -54,16 +54,14 @@ variables.profileEditButton.addEventListener("click", () => {
   editFormPopup.open();
 });
 
-const addFormPopup = new PopupWithForm("#profile-add-modal", () => {
-  const newCard = {
-    name: variables.addTitleInput.value,
-    link: variables.addUrlInput.value,
-  };
-
-  renderCard(newCard);
-  variables.addModalForm.reset();
-  addModalFormValidator.resetValidation();
-});
+const addFormPopup = new PopupWithForm(
+  "#profile-add-modal",
+  ({ title: name, link }) => {
+    renderCard({ name, link });
+    variables.addModalForm.reset();
+    addModalFormValidator.disableSubmitButton();
+  }
+);
 
 addFormPopup.setEventListeners();
 variables.addButton.addEventListener("click", () => {
