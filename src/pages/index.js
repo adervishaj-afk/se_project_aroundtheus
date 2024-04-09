@@ -13,17 +13,11 @@ function createCard(item) {
   const card = new Card(item, "#elementCard", handleImageClick);
   return card.getView();
 }
-
+const popupImage = new PopupWithImage("#element-popout-modal");
 const handleImageClick = (cardData) => {
-  const popupImage = new PopupWithImage("#element-popout-modal");
-
-  variables.modalImage.src = cardData.link;
-  variables.modalImage.alt = cardData.name;
-  variables.modalTitle.textContent = cardData.name;
-
   popupImage.open(cardData);
-  popupImage.setEventListeners();
 };
+popupImage.setEventListeners();
 
 const profileEditFormValidator = new FormValidator(
   formConfig,
@@ -65,16 +59,17 @@ const addFormPopup = new PopupWithForm("#profile-add-modal", () => {
     name: variables.addTitleInput.value,
     link: variables.addUrlInput.value,
   };
+
   renderCard(newCard);
+  variables.addModalForm.reset();
+  addModalFormValidator.resetValidation();
 });
 
 addFormPopup.setEventListeners();
 variables.addButton.addEventListener("click", () => {
-  variables.addModalForm.reset();
-  addModalFormValidator.resetValidation();
   addFormPopup.open();
 });
-
+//
 const cardSection = new Section(
   {
     items: data,
@@ -83,8 +78,8 @@ const cardSection = new Section(
   "#el-card-list"
 );
 
-function renderCard(items) {
-  const cardElement = createCard(items);
+function renderCard(item) {
+  const cardElement = createCard(item);
   cardSection.addItem(cardElement);
 }
 
