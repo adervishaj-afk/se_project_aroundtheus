@@ -1,6 +1,7 @@
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const addModal = document.querySelector("#profile-add-modal");
 const imageModal = document.querySelector("#element-popout-modal");
+const deleteCardModal = document.querySelector("#delete-card-modal");
 
 export const variables = {
   profileEditButton: document.querySelector("#profile-edit-button"),
@@ -65,40 +66,3 @@ export const data = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
-
-/*
-export const editButtonConfig = {
-  profileEditButton: "#profile-edit-button",
-  profileEditModal: "#profile-edit-modal",
-  profileCloseEditButton: "#profile-close-edit-button",
-  profileInfoTitle: "#profile-info-title",
-  profileInfoDescription: "#profile-info-description",
-};
-
-export const addButtonConfig = {
-  addButton: "#profile-add-button",
-  addModal: "#profile-add-modal",
-  closeAddButton: "#profile-close-add-button",
-  addModalForm: "#modal-profile-add-form",
-  addTitleInput: "#profile-modal-add-title",
-  addUrlInput: "#profile-modal-add-URL",
-};
-
-export const popupModalFormConfig = {
-  editFormPopupSelector: "#profile-edit-modal",
-  addFormPopupSelector: "#profile-add-modal",
-  profileModalNameInput: "#profile-edit-modal-title",
-  profileModalDescriptionInput: "#profile-edit-modal-description",
-  profileEditModalForm: "#modal-profile-edit-form",
-};
-
-export const popupCardConfig = {
-  cardList: "#el-card-list",
-  imageModal: "#element-popout-modal",
-  modalImage: "#modal-image",
-  modalTitle: "#modal-text",
-  imageCloseButton: imageModal.querySelector("#element-close-popout-button"),
-  containerSelector: "#el-card-list",
-};
-
-*/

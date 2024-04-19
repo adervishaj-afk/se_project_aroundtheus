@@ -6,13 +6,15 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section";
 import UserInfo from "../components/UserInfo.js";
 import { data, variables, formConfig } from "../utils/Constants.js";
+import Api from "../components/Api.js";
 
 //------------------------------------------------ Refactoring Code
-
+//create cards
 function createCard(item) {
   const card = new Card(item, "#elementCard", handleImageClick);
   return card.getView();
 }
+//create card popup image
 const popupImage = new PopupWithImage("#element-popout-modal");
 const handleImageClick = (cardData) => {
   popupImage.open(cardData);
@@ -41,6 +43,12 @@ const editFormPopup = new PopupWithForm("#profile-edit-modal", (formData) => {
 });
 
 editFormPopup.setEventListeners();
+
+/*
+const deleteCardPopup = new Popup("#delete-card-modal");
+
+deleteCardPopup.setEventListeners();
+*/
 
 const user = new UserInfo({
   nameSelector: "#profile-info-title",
@@ -82,3 +90,11 @@ function renderCard(item) {
 }
 
 cardSection.renderItems();
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "c56e30dc-2883-4270-a59e-b2f7bae969c6",
+    "Content-Type": "application/json",
+  },
+});

@@ -169,6 +169,56 @@
         </div>
       </div>
 
+      <div class="modal" id="delete-card-modal">
+        <div class="modal__container">
+          <button class="modal__close" id="cancel-delete"></button>
+          <label class="modal__label">
+            <span class="modal__title" id="">Are you sure?</span>
+          </label>
+          <button type="submit" class="modal__button" id="confirm-delete">
+            Yes
+          </button>
+        </div>
+      </div>
+
+      <div class="modal" id="edit-avatar">
+        <div class="modal__container">
+          <button class="modal__close" id="cancel-avatar-change"></button>
+          <label class="modal__label">
+            <span class="modal__title" id="">Are you sure?</span>
+          </label>
+          <form
+            name="profile-add-form"
+            class="modal__form"
+            id="modal-profile-add-form"
+          >
+            <label class="modal__label">
+              <input
+                type="text"
+                id="profile-modal-add-title"
+                name="title"
+                class="modal__form-input"
+                placeholder="Title"
+                minlength="1"
+                maxlength="30"
+                required
+              />
+              <span
+                class="modal__error"
+                id="profile-modal-add-title-error"
+              ></span>
+            </label>
+            <button
+              type="submit"
+              class="modal__button modal__button_disabled"
+              id="confirm-avatar-change"
+              disabled
+            >
+            Yes
+          </button>
+        </div>
+      </div>
+
       <template id="elementCard">
         <li class="element">
           <img class="element__image" alt="" src="" id="el-card-image" />
