@@ -6,21 +6,52 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section";
 import UserInfo from "../components/UserInfo.js";
 import { data, variables, formConfig } from "../utils/Constants.js";
-import Api from "../components/Api.js";
 
 //------------------------------------------------ Refactoring Code
-//create cards
+
 function createCard(item) {
-  const card = new Card(item, "#elementCard", handleImageClick);
+  const card = new Card(
+    item,
+    "#elementCard",
+    handleImageClick,
+    handleLikeButtonClick,
+    handleDeleteButtonClick
+  );
   return card.getView();
 }
-//create card popup image
 const popupImage = new PopupWithImage("#element-popout-modal");
 const handleImageClick = (cardData) => {
   popupImage.open(cardData);
 };
 popupImage.setEventListeners();
+/////////////////////////////////////////////////////
 
+const handleLikeButtonClick = (event) => {
+  event.target.classList.toggle("element__like-button_active");
+};
+
+let isDeleteModalSetup = false;
+
+const handleDeleteButtonClick = (event, cardElement) => {
+  deleteModal.classList.add("modal_opened");
+
+  if (!isDeleteModalSetup) {
+    // Confirm delete button event listener
+    variables.confirmDeleteButton.addEventListener("click", () => {
+      cardElement.remove();
+      variables.deleteModal.classList.remove("modal_opened");
+    });
+
+    // Cancel delete button event listener
+    variables.cancelDeleteButton.addEventListener("click", () => {
+      variables.deleteModal.classList.remove("modal_opened");
+    });
+
+    isDeleteModalSetup = true;
+  }
+};
+
+//////////////////////////////////////////
 const profileEditFormValidator = new FormValidator(
   formConfig,
   //"#profile-edit-modal"
@@ -43,12 +74,6 @@ const editFormPopup = new PopupWithForm("#profile-edit-modal", (formData) => {
 });
 
 editFormPopup.setEventListeners();
-
-/*
-const deleteCardPopup = new Popup("#delete-card-modal");
-
-deleteCardPopup.setEventListeners();
-*/
 
 const user = new UserInfo({
   nameSelector: "#profile-info-title",
@@ -90,11 +115,3 @@ function renderCard(item) {
 }
 
 cardSection.renderItems();
-
-const api = new Api({
-  baseUrl: "https://around-api.en.tripleten-services.com/v1",
-  headers: {
-    authorization: "c56e30dc-2883-4270-a59e-b2f7bae969c6",
-    "Content-Type": "application/json",
-  },
-});

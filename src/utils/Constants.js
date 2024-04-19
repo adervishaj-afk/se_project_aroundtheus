@@ -1,9 +1,11 @@
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const addModal = document.querySelector("#profile-add-modal");
 const imageModal = document.querySelector("#element-popout-modal");
-const deleteCardModal = document.querySelector("#delete-card-modal");
+const deleteModal = document.querySelector("#delete-card-modal");
 
 export const variables = {
+  confirmDeleteButton: deleteModal.querySelector("#confirm-delete"),
+  cancelDeleteButton: deleteModal.querySelector("#cancel-delete"),
   profileEditButton: document.querySelector("#profile-edit-button"),
   profileCloseEditButton: document.querySelector("#profile-close-edit-button"),
   profileInfoTitle: document.querySelector("#profile-info-title"),
