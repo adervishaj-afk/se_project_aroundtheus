@@ -4,6 +4,11 @@ const imageModal = document.querySelector("#element-popout-modal");
 const deleteModal = document.querySelector("#delete-card-modal");
 
 export const variables = {
+  profileEditModal: document.querySelector("#profile-edit-modal"),
+  addModal: document.querySelector("#profile-add-modal"),
+  imageModal: document.querySelector("#element-popout-modal"),
+  deleteModal: document.querySelector("#delete-card-modal"),
+  profAvatar: document.querySelector("#avatar"),
   confirmDeleteButton: deleteModal.querySelector("#confirm-delete"),
   cancelDeleteButton: deleteModal.querySelector("#cancel-delete"),
   profileEditButton: document.querySelector("#profile-edit-button"),
@@ -36,35 +41,3 @@ export const formConfig = {
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
 };
-
-export const data = [
-  {
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-  },
-
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
-
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-  },
-
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-  },
-
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-  },
-
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-  },
-];

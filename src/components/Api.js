@@ -4,30 +4,23 @@ export default class Api {
     this.headers = options.headers;
   }
 
-  fetchAPI(url, options) {
+  async fetchAPI(url, options) {
     return fetch(url, options).then((res) => {
-      if (res.ok) {
-        return res.json();
+      if (!res.ok) {
+        return Promise.reject(`HTTP error! Status: ${res.status}`);
       }
-      return Promise.reject(`Error: ${res.status}`);
+      return res.json();
     });
   }
 
-  // Get initial cards
-  getInitialCards() {
-    return this.fetchAPI(`${this.baseUrl}/cards`, {
-      headers: this.headers,
-    });
-  }
-
-  // Get user information
+  // User Methods
   getUserInfo() {
     return this.fetchAPI(`${this.baseUrl}/users/me`, {
+      method: "GET",
       headers: this.headers,
     });
   }
 
-  // Update user profile
   updateUserProfile({ name, about }) {
     return this.fetchAPI(`${this.baseUrl}/users/me`, {
       method: "PATCH",
@@ -36,7 +29,6 @@ export default class Api {
     });
   }
 
-  // Update user avatar
   updateUserAvatar({ avatar }) {
     return this.fetchAPI(`${this.baseUrl}/users/me/avatar`, {
       method: "PATCH",
@@ -45,7 +37,14 @@ export default class Api {
     });
   }
 
-  // Create new card
+  // Card Methods
+  getInitialCards() {
+    return this.fetchAPI(`${this.baseUrl}/cards`, {
+      method: "GET",
+      headers: this.headers,
+    });
+  }
+
   createCard({ name, link }) {
     return this.fetchAPI(`${this.baseUrl}/cards`, {
       method: "POST",
@@ -54,7 +53,6 @@ export default class Api {
     });
   }
 
-  // Delete a card
   deleteCard(cardId) {
     return this.fetchAPI(`${this.baseUrl}/cards/${cardId}`, {
       method: "DELETE",
@@ -62,19 +60,17 @@ export default class Api {
     });
   }
 
-  // Like a card
-  likeCard(cardId) {
+  likeCard = (cardId) => {
     return this.fetchAPI(`${this.baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this.headers,
     });
-  }
+  };
 
-  // Unlike a card
-  unlikeCard(cardId) {
+  unlikeCard = (cardId) => {
     return this.fetchAPI(`${this.baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this.headers,
     });
-  }
+  };
 }

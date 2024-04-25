@@ -1,51 +1,33 @@
 export default class Card {
   constructor(
-    { name, link },
+    { name, link, id },
     cardSelector,
     handleImageClick,
-    handleLike,
-    handleDelete
+    handleLikeButtonClick,
+    handleDeleteButtonClick
   ) {
     this._name = name;
     this._link = link;
+    this._id = id;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
-    this._handleLike = handleLike;
-    this._handleDelete = handleDelete;
-    /*
-    this._deleteModal = document.querySelector("#delete-card-modal");
-
-    this._confirmDeleteButton =
-      this._deleteModal.querySelector("#confirm-delete");
-
-    this._cancelDeleteButton =
-      this._deleteModal.querySelector("#cancel-delete");
-
-    this._setModalEventListeners();
-    */
+    this._handleLike = handleLikeButtonClick;
+    this._handleDelete = handleDeleteButtonClick;
   }
-
-  /*  _setModalEventListeners() {
-    this._confirmDeleteButton.addEventListener(
-      "click",
-      this._handleDeleteButton
-    );
-    this._cancelDeleteButton.addEventListener("click", this._closeDeleteModal);
-  }
-  */
 
   _setEventListeners() {
     //likeButton element + eventListener
     this._cardElement
       .querySelector("#element-like-button")
       .addEventListener("click", () => {
-        this._handleLikeButton();
+        this._handleLikeButton(this);
       });
     //deleteButton element + eventListener
     this._cardElement
       .querySelector("#element-trash-button")
       .addEventListener("click", () => {
-        this._openDeleteModal();
+        ////////////////////////////////////////
+        this._handleDelete(this);
       });
     this._cardElement
       .querySelector("#el-card-image")
@@ -60,20 +42,24 @@ export default class Card {
       .classList.toggle("element__like-button_active");
   }
 
-  _handleDeleteButton = () => {
+  removeCard = () => {
     this._cardElement.remove();
-    this._cardElement = null;
-    this._closeDeleteModal();
+    //this._closeDeleteModal();
   };
-
+  ///////////////////////////
+  /*
   _openDeleteModal() {
-    this._deleteModal.classList.add("modal_opened");
+    this._cardSelector.content
+      .querySelector("#element-trash-button")
+      .classList.add("modal_opened");
   }
-
+  ///////////////////////////
   _closeDeleteModal() {
-    this._deleteModal.classList.remove("modal_opened");
+    this._cardSelector.content
+      .querySelector("#element-trash-button")
+      .classList.remove("modal_opened");
   }
-
+*/
   getView() {
     //create card template
     this._cardElement = document
