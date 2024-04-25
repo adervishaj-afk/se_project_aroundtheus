@@ -9,6 +9,7 @@ export default class Api {
       if (!res.ok) {
         return Promise.reject(`HTTP error! Status: ${res.status}`);
       }
+      console.log(res);
       return res.json();
     });
   }

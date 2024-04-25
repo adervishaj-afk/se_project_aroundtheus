@@ -1,18 +1,9 @@
 export default class Card {
-  constructor(
-    { name, link, id },
-    cardSelector,
-    handleImageClick,
-    handleLikeButtonClick,
-    handleDeleteButtonClick
-  ) {
+  constructor({ name, link }, cardSelector, handleImageClick) {
     this._name = name;
     this._link = link;
-    this._id = id;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
-    this._handleLike = handleLikeButtonClick;
-    this._handleDelete = handleDeleteButtonClick;
   }
 
   _setEventListeners() {
@@ -20,14 +11,13 @@ export default class Card {
     this._cardElement
       .querySelector("#element-like-button")
       .addEventListener("click", () => {
-        this._handleLikeButton(this);
+        this._handleLikeButton();
       });
     //deleteButton element + eventListener
     this._cardElement
       .querySelector("#element-trash-button")
       .addEventListener("click", () => {
-        ////////////////////////////////////////
-        this._handleDelete(this);
+        this._handleDeleteButton();
       });
     this._cardElement
       .querySelector("#el-card-image")
@@ -42,24 +32,11 @@ export default class Card {
       .classList.toggle("element__like-button_active");
   }
 
-  removeCard = () => {
+  _handleDeleteButton() {
     this._cardElement.remove();
-    //this._closeDeleteModal();
-  };
-  ///////////////////////////
-  /*
-  _openDeleteModal() {
-    this._cardSelector.content
-      .querySelector("#element-trash-button")
-      .classList.add("modal_opened");
+    this._cardElement = null;
   }
-  ///////////////////////////
-  _closeDeleteModal() {
-    this._cardSelector.content
-      .querySelector("#element-trash-button")
-      .classList.remove("modal_opened");
-  }
-*/
+
   getView() {
     //create card template
     this._cardElement = document

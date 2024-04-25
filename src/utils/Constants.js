@@ -1,16 +1,8 @@
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const addModal = document.querySelector("#profile-add-modal");
 const imageModal = document.querySelector("#element-popout-modal");
-const deleteModal = document.querySelector("#delete-card-modal");
 
 export const variables = {
-  profileEditModal: document.querySelector("#profile-edit-modal"),
-  addModal: document.querySelector("#profile-add-modal"),
-  imageModal: document.querySelector("#element-popout-modal"),
-  deleteModal: document.querySelector("#delete-card-modal"),
-  profAvatar: document.querySelector("#avatar"),
-  confirmDeleteButton: deleteModal.querySelector("#confirm-delete"),
-  cancelDeleteButton: deleteModal.querySelector("#cancel-delete"),
   profileEditButton: document.querySelector("#profile-edit-button"),
   profileCloseEditButton: document.querySelector("#profile-close-edit-button"),
   profileInfoTitle: document.querySelector("#profile-info-title"),
