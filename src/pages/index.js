@@ -31,17 +31,6 @@ api
     console.error("Failed to load user information:", error);
   });
 
-// api
-// .getInitialCards()
-// .then((cards) => {
-//   cards.forEach((card) => {
-//     renderCard(card);
-//   });
-//   console.log("Cards fetched and rendered successfully.");
-// })
-// .catch((error) => {
-//   console.error("Failed to fetch cards:", error);
-// });
 getCards();
 
 function getCards() {
@@ -59,10 +48,29 @@ function getCards() {
 
 function renderCards(cards) {
   cards.forEach((card) => {
-    const c = new Card(card, "#elementCard", handleImageClick);
-    cardSection.addItem(c.getView());
+    addCardToCardSection(card);
   });
 }
+
+function createCardApi(card) {
+  api
+    .createCard(card)
+    .then((c) => {
+      addCardToCardSection(c);
+    })
+    .catch((error) => {
+      console.error("Failed to create card:", error);
+    });
+}
+
+function addCardToCardSection(card) {
+  const c = new Card(card, "#elementCard", handleImageClick);
+  cardSection.addItem(c.getView());
+}
+
+// const deleteCardModal = new PopupWithForm(variables.deleteCardSelector);
+
+// function handleDeleteClick() {}
 
 const popupImage = new PopupWithImage("#element-popout-modal");
 const handleImageClick = (cardData) => {
@@ -83,7 +91,7 @@ const addModalFormValidator = new FormValidator(
   variables.addModalForm
 );
 addModalFormValidator.enableValidation();
-//------------------------------------------------------------------------------
+
 const editFormPopup = new PopupWithForm("#profile-edit-modal", (formData) => {
   user.setUserInfo({
     name: formData.title,
@@ -105,24 +113,19 @@ variables.profileEditButton.addEventListener("click", () => {
   editFormPopup.open();
 });
 
-const addFormPopup = new PopupWithForm(
+const addCardPopup = new PopupWithForm(
   "#profile-add-modal",
   ({ title: name, link }) => {
-    renderCard({ name, link });
+    createCardApi({ name, link });
     variables.addModalForm.reset();
     addModalFormValidator.disableSubmitButton();
   }
 );
 
-addFormPopup.setEventListeners();
+addCardPopup.setEventListeners();
 variables.addButton.addEventListener("click", () => {
-  addFormPopup.open();
+  addCardPopup.open();
 });
 //
 
 const cardSection = new Section("#el-card-list");
-
-// function renderCard(item) {
-//   const cardElement = createCard(item);
-//   cardSection.addItem(cardElement);
-// }

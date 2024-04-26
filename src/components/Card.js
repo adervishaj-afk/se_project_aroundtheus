@@ -1,9 +1,15 @@
 export default class Card {
-  constructor({ name, link }, cardSelector, handleImageClick) {
+  constructor(
+    { name, link },
+    cardSelector,
+    handleImageClick
+    // handleDeleteButton
+  ) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
+    // this._handleDeleteButton = handleDeleteButton;
   }
 
   _setEventListeners() {
@@ -31,6 +37,8 @@ export default class Card {
       .querySelector("#element-like-button")
       .classList.toggle("element__like-button_active");
   }
+
+  // _openDeleteModal() {}
 
   _handleDeleteButton() {
     this._cardElement.remove();

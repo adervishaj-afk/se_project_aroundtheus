@@ -3,6 +3,8 @@ const addModal = document.querySelector("#profile-add-modal");
 const imageModal = document.querySelector("#element-popout-modal");
 
 export const variables = {
+  deleteCardSelector: document.querySelector("#delete-card-modal"),
+  deleteCardButton: document.querySelector("#delete-card-modal"),
   profileEditButton: document.querySelector("#profile-edit-button"),
   profileCloseEditButton: document.querySelector("#profile-close-edit-button"),
   profileInfoTitle: document.querySelector("#profile-info-title"),
