@@ -1,30 +1,31 @@
 export default class Card {
   constructor(
-    { name, link },
+    { name, link, _id },
     cardSelector,
-    handleImageClick
-    // handleDeleteButton
+    handleImageClick,
+    handleDeleteButton
   ) {
     this._name = name;
     this._link = link;
+    this._id = _id;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
-    // this._handleDeleteButton = handleDeleteButton;
+    this._handleDeleteButton = handleDeleteButton;
   }
 
   _setEventListeners() {
-    //likeButton element + eventListener
     this._cardElement
       .querySelector("#element-like-button")
       .addEventListener("click", () => {
         this._handleLikeButton();
       });
-    //deleteButton element + eventListener
+
     this._cardElement
       .querySelector("#element-trash-button")
       .addEventListener("click", () => {
-        this._handleDeleteButton();
+        this._handleDeleteButton(this._cardElement, { id: this._id });
       });
+
     this._cardElement
       .querySelector("#el-card-image")
       .addEventListener("click", () => {
@@ -40,10 +41,10 @@ export default class Card {
 
   // _openDeleteModal() {}
 
-  _handleDeleteButton() {
-    this._cardElement.remove();
-    this._cardElement = null;
-  }
+  // handleDeleteButton() {
+  //   this._cardElement.remove();
+  //   // this._cardElement = null;
+  // }
 
   getView() {
     //create card template

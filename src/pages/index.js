@@ -3,6 +3,7 @@ import FormValidator from "../components/FormValidator.js";
 import "./index.css";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
+import Popup from "../components/Popup.js";
 import Section from "../components/Section";
 import UserInfo from "../components/UserInfo.js";
 import { variables, formConfig } from "../utils/Constants.js";
@@ -64,13 +65,34 @@ function createCardApi(card) {
 }
 
 function addCardToCardSection(card) {
-  const c = new Card(card, "#elementCard", handleImageClick);
+  const c = new Card(
+    card,
+    "#elementCard",
+    handleImageClick,
+    handleDeleteCardButtonClick
+  );
   cardSection.addItem(c.getView());
 }
 
-// const deleteCardModal = new PopupWithForm(variables.deleteCardSelector);
+const deleteCardModal = new Popup({
+  popupSelector: "#delete-card-modal",
+});
 
-// function handleDeleteClick() {}
+const handleDeleteCardButtonClick = (cardElement, cardData) => {
+  deleteCardModal.setEventListeners();
+  deleteCardModal.open();
+
+  const confirmButton = document.querySelector("#confirm-delete");
+  confirmButton.addEventListener(
+    "click",
+    () => {
+      api.deleteCard(cardData.id);
+      cardElement.remove();
+      deleteCardModal.close();
+    },
+    { once: true }
+  );
+};
 
 const popupImage = new PopupWithImage("#element-popout-modal");
 const handleImageClick = (cardData) => {
