@@ -3,6 +3,10 @@ const addModal = document.querySelector("#profile-add-modal");
 const imageModal = document.querySelector("#element-popout-modal");
 
 export const variables = {
+  //likeButton: document.querySelector("#element-like-button"),
+  confirmButton: document.querySelector("#confirm-delete"),
+  avatarModalForm: document.querySelector("#modal-change-avatar-form"),
+  avatarIcon: document.querySelector("#user-avatar"),
   profileEditButton: document.querySelector("#profile-edit-button"),
   profileCloseEditButton: document.querySelector("#profile-close-edit-button"),
   profileInfoTitle: document.querySelector("#profile-info-title"),

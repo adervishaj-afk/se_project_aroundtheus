@@ -13,6 +13,25 @@
   margin: 0 30px 0 0;
 }
 
+.profile__image:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+/*
+.profile__image-overlay {
+  content: url("../images/change-avatar-icon.svg");
+  height: 26px;
+  width: 26px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-position: center;
+  margin: 0 30px 0 0;
+}
+
+.profile__image-overlay:hover {
+  background-image: transparent;
+} */
+
 .profile__info {
   display: grid;
   grid-template-areas:
