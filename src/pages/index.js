@@ -86,12 +86,12 @@ const handleLike = (cardElement, cardData) => {
       .classList.contains("element__like-button_active")
   ) {
     api
-      .unlikeCard(cardData.id)
-      .then(() => console.log("Card disliked successfully."));
-  } else {
-    api
       .likeCard(cardData.id)
       .then(() => console.log("Card liked successfully."));
+  } else {
+    api
+      .unlikeCard(cardData.id)
+      .then(() => console.log("Card disliked successfully."));
   }
 };
 
