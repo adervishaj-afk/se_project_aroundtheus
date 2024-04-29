@@ -18,6 +18,12 @@ const api = new Api({
   },
 });
 
+const user = new UserInfo({
+  nameSelector: "#profile-info-title",
+  jobSelector: "#profile-info-description",
+  avatarSelector: "#user-avatar",
+});
+
 api
   .getUserInfo()
   .then((userData) => {
@@ -31,6 +37,28 @@ api
   .catch((error) => {
     console.error("Failed to load user information:", error);
   });
+
+const editFormPopup = new PopupWithForm("#profile-edit-modal", (formData) => {
+  variables.editModalProfileSaveButton.textContent = "Saving...";
+  api
+    .updateUserProfile({ name: formData.title, about: formData.description })
+    .then(() => {
+      variables.editModalProfileSaveButton.textContent = "Save";
+      user.setUserInfo({
+        name: formData.title,
+        job: formData.description,
+      });
+    });
+});
+
+variables.profileEditButton.addEventListener("click", () => {
+  const userInfo = user.getUserInfo();
+  variables.profileModalNameInput.value = userInfo.name.trim();
+  variables.profileModalDescriptionInput.value = userInfo.job.trim();
+  editFormPopup.open();
+});
+
+editFormPopup.setEventListeners();
 
 getCards();
 
@@ -140,28 +168,6 @@ const avatarFormValidator = new FormValidator(
 );
 avatarFormValidator.enableValidation();
 
-const editFormPopup = new PopupWithForm("#profile-edit-modal", (formData) => {
-  user.setUserInfo({
-    name: formData.title,
-    job: formData.description,
-  });
-});
-
-editFormPopup.setEventListeners();
-
-const user = new UserInfo({
-  nameSelector: "#profile-info-title",
-  jobSelector: "#profile-info-description",
-  avatarSelector: "#user-avatar",
-});
-
-variables.profileEditButton.addEventListener("click", () => {
-  const userInfo = user.getUserInfo();
-  variables.profileModalNameInput.value = userInfo.name.trim();
-  variables.profileModalDescriptionInput.value = userInfo.job.trim();
-  editFormPopup.open();
-});
-
 const addCardPopup = new PopupWithForm(
   "#profile-add-modal",
   ({ title: name, link }) => {
@@ -179,7 +185,11 @@ variables.addButton.addEventListener("click", () => {
 const avatarPopupForm = new PopupWithForm(
   "#edit-avatar",
   ({ link: avatar }) => {
-    api.updateUserAvatar({ avatar });
+    variables.avatarModalSaveButton.textContent = "Saving...";
+    api.updateUserAvatar({ avatar }).then((res) => {
+      variables.pavatarModalSaveButton.textContent = "Save";
+      console.log("Profile data saved successfully:", res);
+    });
     variables.avatarModalForm.reset();
     addModalFormValidator.disableSubmitButton();
   }
