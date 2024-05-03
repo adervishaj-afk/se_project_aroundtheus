@@ -3,6 +3,7 @@ import FormValidator from "../components/FormValidator.js";
 import "./index.css";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
+import confirmPopup from "../components/confirmPopup.js";
 import Popup from "../components/Popup.js";
 import Section from "../components/Section";
 import UserInfo from "../components/UserInfo.js";
@@ -123,23 +124,16 @@ const handleLike = (cardElement, cardData) => {
   }
 };
 
-const deleteCardModal = new Popup({
+const deleteCardModal = new confirmPopup({
   popupSelector: "#delete-card-modal",
+  confirmCallback: (id) => {
+    api.deleteCard(id).then((data) => console.log(data));
+  },
 });
+deleteCardModal.setEventListeners();
 
 const handleDeleteCardButtonClick = (cardElement, cardData) => {
-  deleteCardModal.setEventListeners();
-  deleteCardModal.open();
-
-  variables.confirmButton.addEventListener(
-    "click",
-    () => {
-      api.deleteCard(cardData.id);
-      cardElement.remove();
-      deleteCardModal.close();
-    },
-    { once: true }
-  );
+  deleteCardModal.open(cardElement, cardData.id);
 };
 
 const popupImage = new PopupWithImage("#element-popout-modal");
