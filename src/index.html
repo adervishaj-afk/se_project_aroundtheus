@@ -21,12 +21,15 @@
       </header>
       <main>
         <section class="profile page__section">
-          <img
-            src="<%=require('./images/jacques-cousteau.svg')%>"
-            alt="avatar"
-            class="profile__image, profile__image-overlay"
-            id="user-avatar"
-          />
+          <div class="profile__avatar">
+            <img
+              src="<%=require('./images/jacques-cousteau.svg')%>"
+              alt="avatar"
+              class="profile__image"
+              id="user-avatar"
+            />
+            <div class="profile__avatar-overlay"></div>
+          </div>
           <div class="profile__info">
             <h1 class="profile__title" id="profile-info-title">
               Jacques-Cousteau

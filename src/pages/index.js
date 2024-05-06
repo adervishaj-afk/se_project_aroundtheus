@@ -102,6 +102,29 @@ function createCardApi(card) {
     });
 }
 
+/*
+cardSection = new Section(
+        {
+            items: cards,
+            renderer: (card) => {
+                // Create a new card
+                const cardElement = createCard(card, userId);
+                // Display each card
+                cardSection.addItem(cardElement);
+            },
+        },
+        selectors.cardsList,
+        userId
+    );
+    // Render the entire list of cards on the page
+    cardSection.renderItems(cards);
+})
+.catch((err) => {
+    // If the server returns an error, reject the promise
+    console.error(`Error: ${err}`);
+})
+*/
+
 const addCardPopup = new PopupWithForm(
   "#profile-add-modal",
   ({ title: name, link }) => {
