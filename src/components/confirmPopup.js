@@ -21,9 +21,11 @@ export default class ConfirmPopup extends Popup {
     super.close();
   }
 
+  removeCard() {
+    this._cardElement.remove();
+  }
+
   _handlePress() {
     this._confirmCallback(this._id);
-    this._cardElement.remove();
-    this.close();
   }
 }

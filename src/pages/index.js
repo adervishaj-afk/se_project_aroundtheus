@@ -3,7 +3,7 @@ import FormValidator from "../components/FormValidator.js";
 import "./index.css";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
-import confirmPopup from "../components/confirmPopup.js";
+import confirmPopup from "../components/ConfirmPopup.js";
 import Popup from "../components/Popup.js";
 import Section from "../components/Section";
 import UserInfo from "../components/UserInfo.js";
@@ -44,11 +44,17 @@ const editFormPopup = new PopupWithForm("#profile-edit-modal", (formData) => {
   api
     .updateUserProfile({ name: formData.title, about: formData.description })
     .then(() => {
-      variables.editModalProfileSaveButton.textContent = "Save";
       user.setUserInfo({
         name: formData.title,
         job: formData.description,
       });
+      editFormPopup.close();
+    })
+    .catch((error) => {
+      console.error("Failed to update user information:", error);
+    })
+    .finally(() => {
+      variables.editModalProfileSaveButton.textContent = "Save";
     });
 });
 
@@ -87,12 +93,53 @@ function createCardApi(card) {
     .createCard(card)
     .then((c) => {
       addCardToCardSection(c);
+      addCardPopup.close();
+      variables.addModalForm.reset();
     })
     .then(console.log("Card created and rendered successfully."))
     .catch((error) => {
       console.error("Failed to create card:", error);
     });
 }
+
+const addCardPopup = new PopupWithForm(
+  "#profile-add-modal",
+  ({ title: name, link }) => {
+    createCardApi({ name, link });
+    addModalFormValidator.disableSubmitButton();
+  }
+);
+
+addCardPopup.setEventListeners();
+variables.addButton.addEventListener("click", () => {
+  addCardPopup.open();
+});
+
+const avatarPopupForm = new PopupWithForm(
+  "#edit-avatar",
+  ({ link: avatar }) => {
+    variables.avatarModalSaveButton.textContent = "Saving...";
+    api
+      .updateUserAvatar({ avatar })
+      .then((res) => {
+        avatarPopupForm.close();
+        variables.avatarModalForm.reset();
+        console.log("Profile data saved successfully:", res);
+      })
+      .catch((error) => {
+        console.error("Failed to update user avatar:", error);
+      })
+      .finally(() => {
+        variables.avatarModalSaveButton.textContent = "Save";
+      });
+    addModalFormValidator.disableSubmitButton();
+  }
+);
+
+avatarPopupForm.setEventListeners();
+variables.avatarIcon.addEventListener("click", () => {
+  avatarPopupForm.open();
+});
 
 function addCardToCardSection(card) {
   const c = new Card(
@@ -116,20 +163,36 @@ const handleLike = (cardElement, cardData) => {
   ) {
     api
       .likeCard(cardData.id)
-      .then(() => console.log("Card liked successfully."));
+      .then(() => console.log("Card liked successfully."))
+      .catch((error) => {
+        console.error("Failed to like card:", error);
+      });
   } else {
     api
       .unlikeCard(cardData.id)
-      .then(() => console.log("Card disliked successfully."));
+      .then(() => console.log("Card disliked successfully."))
+      .catch((error) => {
+        console.error("Failed to unlike card:", error);
+      });
   }
 };
 
 const deleteCardModal = new confirmPopup({
   popupSelector: "#delete-card-modal",
   confirmCallback: (id) => {
-    api.deleteCard(id).then((data) => console.log(data));
+    api
+      .deleteCard(id)
+      .then(() => {
+        deleteCardModal.removeCard();
+        deleteCardModal.close();
+        (data) => console.log(data);
+      })
+      .catch((error) => {
+        console.error("Failed to delete card:", error);
+      });
   },
 });
+
 deleteCardModal.setEventListeners();
 
 const handleDeleteCardButtonClick = (cardElement, cardData) => {
@@ -161,37 +224,5 @@ const avatarFormValidator = new FormValidator(
   variables.avatarModalForm
 );
 avatarFormValidator.enableValidation();
-
-const addCardPopup = new PopupWithForm(
-  "#profile-add-modal",
-  ({ title: name, link }) => {
-    createCardApi({ name, link });
-    variables.addModalForm.reset();
-    addModalFormValidator.disableSubmitButton();
-  }
-);
-
-addCardPopup.setEventListeners();
-variables.addButton.addEventListener("click", () => {
-  addCardPopup.open();
-});
-
-const avatarPopupForm = new PopupWithForm(
-  "#edit-avatar",
-  ({ link: avatar }) => {
-    variables.avatarModalSaveButton.textContent = "Saving...";
-    api.updateUserAvatar({ avatar }).then((res) => {
-      variables.pavatarModalSaveButton.textContent = "Save";
-      console.log("Profile data saved successfully:", res);
-    });
-    variables.avatarModalForm.reset();
-    addModalFormValidator.disableSubmitButton();
-  }
-);
-
-avatarPopupForm.setEventListeners();
-variables.avatarIcon.addEventListener("click", () => {
-  avatarPopupForm.open();
-});
 
 const cardSection = new Section("#el-card-list");
