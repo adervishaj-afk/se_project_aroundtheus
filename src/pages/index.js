@@ -178,7 +178,7 @@ const avatarPopupForm = new PopupWithForm(
 /* -------------------------------------------------------------------------- */
 
 avatarPopupForm.setEventListeners();
-variables.avatarIcon.addEventListener("click", () => {
+variables.avatarChangeBut.addEventListener("click", () => {
   avatarPopupForm.open();
 });
 
