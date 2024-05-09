@@ -112,6 +112,7 @@ function getCards() {
 /* -------------------------------------------------------------------------------------------- */
 
 function createNewCard(card) {
+  variables.createCardButton.textContent = "Creating...";
   api
     .createCard(card)
     .then((cardData) => {
@@ -120,7 +121,10 @@ function createNewCard(card) {
       variables.addModalForm.reset();
     })
     .catch((error) => {
-      console.error("Failed to create card:", error);
+      console.error("Failed to create new card", error);
+    })
+    .finally(() => {
+      variables.createCardButton.textContent = "Create";
     });
 }
 
