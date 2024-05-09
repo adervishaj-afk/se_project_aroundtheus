@@ -40,6 +40,7 @@
 }
 
 .profile__avatar-overlay:hover {
+  z-index: 2;
   opacity: 0.6;
   transition: ease-in 0.5s;
 }

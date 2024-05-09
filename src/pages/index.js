@@ -37,7 +37,6 @@ api
       job: userData.about,
       avatar: userData.avatar,
     });
-    console.log("User information loaded and displayed successfully.");
   })
   .catch((error) => {
     console.error("Failed to load user information:", error);
@@ -85,12 +84,13 @@ editFormPopup.setEventListeners();
 
 getCards();
 
+let cardSection;
+
 function getCards() {
   api
     .getInitialCards()
     .then((cards) => {
-      console.log("Cards fetched and rendered successfully.");
-      const cardSection = new Section(
+      cardSection = new Section(
         {
           items: cards,
           renderer: (card) => {
@@ -107,24 +107,18 @@ function getCards() {
     });
 }
 
-/* -------------------------------------------------------------------------- */
-/*                          Display the cards on the UI                       */
-/* -------------------------------------------------------------------------- */
-
 /* -------------------------------------------------------------------------------------------- */
-/*      Create new card and store the info in the server, then call to create card object       */
+/*      Create new card and store the info in the server, then call to render card object       */
 /* -------------------------------------------------------------------------------------------- */
 
 function createNewCard(card) {
   api
     .createCard(card)
-    .then((cardInfo) => {
-      //const newCard = createCard(cardInfo);
-      //cardSection.addItem(newCard);
+    .then((cardData) => {
+      cardSection.addItem(createCard(cardData));
       addCardPopup.close();
       variables.addModalForm.reset();
     })
-    .then(console.log("Card created and rendered successfully."))
     .catch((error) => {
       console.error("Failed to create card:", error);
     });
@@ -164,7 +158,6 @@ const avatarPopupForm = new PopupWithForm(
       .then((res) => {
         avatarPopupForm.close();
         variables.avatarModalForm.reset();
-        console.log("Profile data saved successfully:", res);
       })
       .catch((error) => {
         console.error("Failed to update user avatar:", error);
@@ -301,6 +294,3 @@ const avatarFormValidator = new FormValidator(
   variables.avatarModalForm
 );
 avatarFormValidator.enableValidation();
-
-//const cardSection = new Section("#el-card-list");
-//renderer,
