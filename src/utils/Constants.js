@@ -3,6 +3,7 @@ const addModal = document.querySelector("#profile-add-modal");
 const imageModal = document.querySelector("#element-popout-modal");
 
 export const variables = {
+  cardsList: ".cards__list",
   editModalProfileSaveButton: document.querySelector(
     "#edit-profile-modal-save-button"
   ),

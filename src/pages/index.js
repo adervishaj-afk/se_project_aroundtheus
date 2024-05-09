@@ -19,6 +19,10 @@ const api = new Api({
   },
 });
 
+/* -------------------------------------------------------------------------- */
+/*                     Get initial user info from server--                    */
+/* -------------------------------------------------------------------------- */
+
 const user = new UserInfo({
   nameSelector: "#profile-info-title",
   jobSelector: "#profile-info-description",
@@ -39,6 +43,10 @@ api
     console.error("Failed to load user information:", error);
   });
 
+/* -------------------------------------------------------------------------- */
+/*                       Display the user info                                */
+/* -------------------------------------------------------------------------- */
+
 const editFormPopup = new PopupWithForm("#profile-edit-modal", (formData) => {
   variables.editModalProfileSaveButton.textContent = "Saving...";
   api
@@ -58,6 +66,10 @@ const editFormPopup = new PopupWithForm("#profile-edit-modal", (formData) => {
     });
 });
 
+/* -------------------------------------------------------------------------- */
+/*                   Edit Button Event Listener                               */
+/* -------------------------------------------------------------------------- */
+
 variables.profileEditButton.addEventListener("click", () => {
   const userInfo = user.getUserInfo();
   variables.profileModalNameInput.value = userInfo.name.trim();
@@ -67,6 +79,10 @@ variables.profileEditButton.addEventListener("click", () => {
 
 editFormPopup.setEventListeners();
 
+/* -------------------------------------------------------------------------- */
+/*                    Get the initial cards from server                       */
+/* -------------------------------------------------------------------------- */
+
 getCards();
 
 function getCards() {
@@ -74,25 +90,37 @@ function getCards() {
     .getInitialCards()
     .then((cards) => {
       console.log("Cards fetched and rendered successfully.");
-      renderCards(cards);
-      return cards;
+      const cardSection = new Section(
+        {
+          items: cards,
+          renderer: (card) => {
+            const cardElement = createCard(card);
+            cardSection.addItem(cardElement);
+          },
+        },
+        "#el-card-list"
+      );
+      cardSection.renderCards(cards);
     })
     .catch((error) => {
       console.error("Failed to fetch cards:", error);
     });
 }
 
-function renderCards(cards) {
-  cards.forEach((card) => {
-    addCardToCardSection(card);
-  });
-}
+/* -------------------------------------------------------------------------- */
+/*                          Display the cards on the UI                       */
+/* -------------------------------------------------------------------------- */
 
-function createCardApi(card) {
+/* -------------------------------------------------------------------------------------------- */
+/*      Create new card and store the info in the server, then call to create card object       */
+/* -------------------------------------------------------------------------------------------- */
+
+function createNewCard(card) {
   api
     .createCard(card)
-    .then((c) => {
-      addCardToCardSection(c);
+    .then((cardInfo) => {
+      //const newCard = createCard(cardInfo);
+      //cardSection.addItem(newCard);
       addCardPopup.close();
       variables.addModalForm.reset();
     })
@@ -102,41 +130,30 @@ function createCardApi(card) {
     });
 }
 
-/*
-cardSection = new Section(
-        {
-            items: cards,
-            renderer: (card) => {
-                // Create a new card
-                const cardElement = createCard(card, userId);
-                // Display each card
-                cardSection.addItem(cardElement);
-            },
-        },
-        selectors.cardsList,
-        userId
-    );
-    // Render the entire list of cards on the page
-    cardSection.renderItems(cards);
-})
-.catch((err) => {
-    // If the server returns an error, reject the promise
-    console.error(`Error: ${err}`);
-})
-*/
+/* -------------------------------------------------------------------------- */
+/*               Call API to submit card info to be created                   */
+/* -------------------------------------------------------------------------- */
 
 const addCardPopup = new PopupWithForm(
   "#profile-add-modal",
   ({ title: name, link }) => {
-    createCardApi({ name, link });
+    createNewCard({ name, link });
     addModalFormValidator.disableSubmitButton();
   }
 );
+
+/* -------------------------------------------------------------------------- */
+/*                    Add Card Form Event Listener                            */
+/* -------------------------------------------------------------------------- */
 
 addCardPopup.setEventListeners();
 variables.addButton.addEventListener("click", () => {
   addCardPopup.open();
 });
+
+/* -------------------------------------------------------------------------- */
+/*                         Call API and pass info to update the avatar        */
+/* -------------------------------------------------------------------------- */
 
 const avatarPopupForm = new PopupWithForm(
   "#edit-avatar",
@@ -159,21 +176,34 @@ const avatarPopupForm = new PopupWithForm(
   }
 );
 
+/* -------------------------------------------------------------------------- */
+/*                   Edit Avatar Form Event Listener                          */
+/* -------------------------------------------------------------------------- */
+
 avatarPopupForm.setEventListeners();
 variables.avatarIcon.addEventListener("click", () => {
   avatarPopupForm.open();
 });
 
-function addCardToCardSection(card) {
-  const c = new Card(
+/* -------------------------------------------------------------------------- */
+/*                  Create card object and render the images                  */
+/* -------------------------------------------------------------------------- */
+
+function createCard(card) {
+  const newCard = new Card(
     card,
     "#elementCard",
     handleImageClick,
     handleDeleteCardButtonClick,
     handleLike
   );
-  cardSection.addItem(c.getView());
+
+  return newCard.getView();
 }
+
+/* -------------------------------------------------------------------------- */
+/*              Handle like/dislike functionality callback                    */
+/* -------------------------------------------------------------------------- */
 
 const handleLike = (cardElement, cardData) => {
   cardElement
@@ -200,6 +230,10 @@ const handleLike = (cardElement, cardData) => {
   }
 };
 
+/* -------------------------------------------------------------------------- */
+/*                     Delete card functionality callback                     */
+/* -------------------------------------------------------------------------- */
+
 const deleteCardModal = new confirmPopup({
   popupSelector: "#delete-card-modal",
   confirmCallback: (id) => {
@@ -216,17 +250,29 @@ const deleteCardModal = new confirmPopup({
   },
 });
 
+/* -------------------------------------------------------------------------- */
+/*                         Delete Modal Event Listener                        */
+/* -------------------------------------------------------------------------- */
+
 deleteCardModal.setEventListeners();
 
 const handleDeleteCardButtonClick = (cardElement, cardData) => {
   deleteCardModal.open(cardElement, cardData.id);
 };
 
+/* -------------------------------------------------------------------------- */
+/*                         Expand Image Event Listener                        */
+/* -------------------------------------------------------------------------- */
+
 const popupImage = new PopupWithImage("#element-popout-modal");
 const handleImageClick = (cardData) => {
   popupImage.open(cardData);
 };
 popupImage.setEventListeners();
+
+/* -------------------------------------------------------------------------- */
+/*                  Pass form inputs to validate *Edit* form data             */
+/* -------------------------------------------------------------------------- */
 
 const profileEditFormValidator = new FormValidator(
   formConfig,
@@ -235,6 +281,10 @@ const profileEditFormValidator = new FormValidator(
 );
 profileEditFormValidator.enableValidation();
 
+/* -------------------------------------------------------------------------- */
+/*                  Pass form inputs to validate *Add* form data              */
+/* -------------------------------------------------------------------------- */
+
 const addModalFormValidator = new FormValidator(
   formConfig,
   //"#profile-add-modal"
@@ -242,10 +292,15 @@ const addModalFormValidator = new FormValidator(
 );
 addModalFormValidator.enableValidation();
 
+/* -------------------------------------------------------------------------- */
+/*                  Pass form inputs to validate *Avatar* form data           */
+/* -------------------------------------------------------------------------- */
+
 const avatarFormValidator = new FormValidator(
   formConfig,
   variables.avatarModalForm
 );
 avatarFormValidator.enableValidation();
 
-const cardSection = new Section("#el-card-list");
+//const cardSection = new Section("#el-card-list");
+//renderer,
