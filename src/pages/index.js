@@ -160,6 +160,7 @@ const avatarPopupForm = new PopupWithForm(
     api
       .updateUserAvatar({ avatar })
       .then((res) => {
+        variables.avatarIcon.src = res.avatar;
         avatarPopupForm.close();
         variables.avatarModalForm.reset();
       })
