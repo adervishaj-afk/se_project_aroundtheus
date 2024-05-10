@@ -234,18 +234,6 @@ const handleLike = (cardElement, cardData) => {
 
 const deleteCardModal = new confirmPopup({
   popupSelector: "#delete-card-modal",
-  confirmCallback: (id) => {
-    api
-      .deleteCard(id)
-      .then(() => {
-        deleteCardModal.removeCard();
-        deleteCardModal.close();
-        (data) => console.log(data);
-      })
-      .catch((error) => {
-        console.error("Failed to delete card:", error);
-      });
-  },
 });
 
 /* -------------------------------------------------------------------------- */
@@ -254,8 +242,20 @@ const deleteCardModal = new confirmPopup({
 
 deleteCardModal.setEventListeners();
 
-const handleDeleteCardButtonClick = (cardElement, cardData) => {
-  deleteCardModal.open(cardElement, cardData.id);
+const handleDeleteCardButtonClick = (card) => {
+  deleteCardModal.open();
+  deleteCardModal.setSubmitAction(() => {
+    api
+      .deleteCard(card._id)
+      .then(() => {
+        card.removeCard();
+        deleteCardModal.close();
+        (data) => console.log(data);
+      })
+      .catch((error) => {
+        console.error("Failed to delete card:", error);
+      });
+  });
 };
 
 /* -------------------------------------------------------------------------- */

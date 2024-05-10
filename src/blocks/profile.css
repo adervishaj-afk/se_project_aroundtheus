@@ -17,7 +17,6 @@
   border-radius: 50%;
   object-fit: cover;
   cursor: pointer;
-  background-image: url("../images/change-avatar-icon.svg");
 }
 
 .profile__avatar-overlay {
