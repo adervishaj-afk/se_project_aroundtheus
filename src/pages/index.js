@@ -3,7 +3,7 @@ import FormValidator from "../components/FormValidator.js";
 import "./index.css";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
-import confirmPopup from "../components/ConfirmPopup.js";
+import ConfirmPopup from "../components/ConfirmPopup.js";
 import Popup from "../components/Popup.js";
 import Section from "../components/Section";
 import UserInfo from "../components/UserInfo.js";
@@ -232,7 +232,7 @@ const handleLike = (cardElement, cardData) => {
 /*                     Delete card functionality callback                     */
 /* -------------------------------------------------------------------------- */
 
-const deleteCardModal = new confirmPopup({
+const deleteCardModal = new ConfirmPopup({
   popupSelector: "#delete-card-modal",
 });
 
