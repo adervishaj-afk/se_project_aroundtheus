@@ -57,6 +57,7 @@ const editFormPopup = new PopupWithForm("#profile-edit-modal", (formData) => {
       user.setUserInfo({
         name: formData.title,
         job: formData.description,
+        avatar: user.getUserInfo().avatar,
       });
       editFormPopup.close();
     })
