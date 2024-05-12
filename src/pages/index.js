@@ -49,7 +49,10 @@ api
 const editFormPopup = new PopupWithForm("#profile-edit-modal", (formData) => {
   variables.editModalProfileSaveButton.textContent = "Saving...";
   api
-    .updateUserProfile({ name: formData.title, about: formData.description })
+    .updateUserProfile({
+      name: formData.title,
+      about: formData.description,
+    })
     .then(() => {
       user.setUserInfo({
         name: formData.title,
@@ -193,7 +196,8 @@ function createCard(card) {
     "#elementCard",
     handleImageClick,
     handleDeleteCardButtonClick,
-    handleLike
+    likeCardAPI,
+    unlikeCardAPI
   );
 
   return newCard.getView();
@@ -203,29 +207,21 @@ function createCard(card) {
 /*              Handle like/dislike functionality callback                    */
 /* -------------------------------------------------------------------------- */
 
-const handleLike = (cardElement, cardData) => {
-  cardElement
-    .querySelector("#element-like-button")
-    .classList.toggle("element__like-button_active");
-  if (
-    cardElement
-      .querySelector("#element-like-button")
-      .classList.contains("element__like-button_active")
-  ) {
-    api
-      .likeCard(cardData.id)
-      .then(() => console.log("Card liked successfully."))
-      .catch((error) => {
-        console.error("Failed to like card:", error);
-      });
-  } else {
-    api
-      .unlikeCard(cardData.id)
-      .then(() => console.log("Card disliked successfully."))
-      .catch((error) => {
-        console.error("Failed to unlike card:", error);
-      });
-  }
+const likeCardAPI = (cardData) => {
+  api
+    .likeCard(cardData)
+    .then(() => console.log("Card liked successfully."))
+    .catch((error) => {
+      console.error("Failed to like card:", error);
+    });
+};
+const unlikeCardAPI = (cardData) => {
+  api
+    .unlikeCard(cardData)
+    .then(() => console.log("Card disliked successfully."))
+    .catch((error) => {
+      console.error("Failed to unlike card:", error);
+    });
 };
 
 /* -------------------------------------------------------------------------- */
