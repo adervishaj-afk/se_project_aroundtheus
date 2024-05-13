@@ -164,7 +164,6 @@ const addCardPopup = new PopupWithForm(
   "#profile-add-modal",
   ({ title: name, link }) => {
     createNewCard({ name, link });
-    addModalFormValidator.disableSubmitButton();
   }
 );
 
@@ -204,10 +203,10 @@ const avatarPopupForm = new PopupWithForm(
       })
       .catch((error) => {
         console.error("Failed to update user avatar:", error);
+        avatarFormValidator.disableSubmitButton();
       })
       .finally(() => {
         variables.avatarModalSaveButton.textContent = "Save";
-        avatarFormValidator.disableSubmitButton();
       });
   }
 );
@@ -246,7 +245,7 @@ const likeCardAPI = (cardData, changeLike) => {
   api
     .likeCard(cardData)
     .then(() => {
-      changeLike.classList.toggle("element__like-button_active");
+      changeLike.toggleLike();
       console.log("Card liked successfully.");
     })
     .catch((error) => {
@@ -257,7 +256,7 @@ const unlikeCardAPI = (cardData, changeLike) => {
   api
     .unlikeCard(cardData)
     .then(() => {
-      changeLike.classList.toggle("element__like-button_active");
+      changeLike.toggleLike();
       console.log("Card disliked successfully.");
     })
     .catch((error) => {
