@@ -195,7 +195,6 @@ const avatarPopupForm = new PopupWithForm(
   "#edit-avatar",
   ({ link: avatar }) => {
     variables.avatarModalSaveButton.textContent = "Saving...";
-    avatarFormValidator.disableSubmitButton(); //12May24 comment
     api
       .updateUserAvatar({ avatar })
       .then((res) => {
@@ -205,11 +204,10 @@ const avatarPopupForm = new PopupWithForm(
       })
       .catch((error) => {
         console.error("Failed to update user avatar:", error);
-        avatarFormValidator.enableSubmitButton(); //12May24 comment
       })
       .finally(() => {
         variables.avatarModalSaveButton.textContent = "Save";
-        avatarFormValidator.enableSubmitButton(); //12May24 comment
+        avatarFormValidator.disableSubmitButton();
       });
   }
 );
