@@ -50,11 +50,10 @@ export default class Card {
   }
 
   _handleLike(cardData) {
-    this._likeButton.classList.toggle("element__like-button_active");
     if (this._likeButton.classList.contains("element__like-button_active")) {
-      this._likeCardAPI(cardData.id);
+      this._unlikeCardAPI(cardData.id, this._likeButton);
     } else {
-      this._unlikeCardAPI(cardData.id);
+      this._likeCardAPI(cardData.id, this._likeButton);
     }
   }
 

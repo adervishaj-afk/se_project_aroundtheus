@@ -1,8 +1,13 @@
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const addModal = document.querySelector("#profile-add-modal");
 const imageModal = document.querySelector("#element-popout-modal");
+const cardElement = document
+  .querySelector("#elementCard")
+  .content.querySelector(".element")
+  .cloneNode(true);
 
 export const variables = {
+  likeButton: cardElement.querySelector(".element__like-button"),
   avatarChangeBut: document.querySelector(".profile__avatar-overlay"),
   addModal: document.querySelector("#profile-add-modal"),
   createCardButton: addModal.querySelector(".modal__button"),

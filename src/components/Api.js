@@ -46,7 +46,7 @@ export default class Api {
   }
 
   createCard({ name, link }) {
-    return this.fetchAPI(`${this.baseUrl}/cards`, {
+    return this.fetchAPI(`${this.baseUrl}/cards1`, {
       method: "POST",
       headers: this.headers,
       body: JSON.stringify({ name, link }),

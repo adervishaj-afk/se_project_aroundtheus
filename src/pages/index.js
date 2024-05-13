@@ -43,6 +43,17 @@ api
   });
 
 /* -------------------------------------------------------------------------- */
+/*                  Pass form inputs to validate *Edit* form data             */
+/* -------------------------------------------------------------------------- */
+
+const profileEditFormValidator = new FormValidator(
+  formConfig,
+  //"#profile-edit-modal"
+  variables.profileEditModalForm
+);
+profileEditFormValidator.enableValidation();
+
+/* -------------------------------------------------------------------------- */
 /*                       Display the user info                                */
 /* -------------------------------------------------------------------------- */
 
@@ -104,12 +115,23 @@ function getCards() {
         },
         "#el-card-list"
       );
-      cardSection.renderCards(cards);
+      cardSection.renderCards();
     })
     .catch((error) => {
       console.error("Failed to fetch cards:", error);
     });
 }
+
+/* -------------------------------------------------------------------------- */
+/*                  Pass form inputs to validate *Add* form data              */
+/* -------------------------------------------------------------------------- */
+
+const addModalFormValidator = new FormValidator(
+  formConfig,
+  //"#profile-add-modal"
+  variables.addModalForm
+);
+addModalFormValidator.enableValidation();
 
 /* -------------------------------------------------------------------------------------------- */
 /*      Create new card and store the info in the server, then call to render card object       */
@@ -117,6 +139,7 @@ function getCards() {
 
 function createNewCard(card) {
   variables.createCardButton.textContent = "Creating...";
+  addModalFormValidator.disableSubmitButton();
   api
     .createCard(card)
     .then((cardData) => {
@@ -125,6 +148,7 @@ function createNewCard(card) {
       variables.addModalForm.reset();
     })
     .catch((error) => {
+      addModalFormValidator.enableSubmitButton();
       console.error("Failed to create new card", error);
     })
     .finally(() => {
@@ -154,6 +178,16 @@ variables.addButton.addEventListener("click", () => {
 });
 
 /* -------------------------------------------------------------------------- */
+/*                  Pass form inputs to validate *Avatar* form data           */
+/* -------------------------------------------------------------------------- */
+
+const avatarFormValidator = new FormValidator(
+  formConfig,
+  variables.avatarModalForm
+);
+avatarFormValidator.enableValidation();
+
+/* -------------------------------------------------------------------------- */
 /*                         Call API and pass info to update the avatar        */
 /* -------------------------------------------------------------------------- */
 
@@ -161,20 +195,22 @@ const avatarPopupForm = new PopupWithForm(
   "#edit-avatar",
   ({ link: avatar }) => {
     variables.avatarModalSaveButton.textContent = "Saving...";
+    avatarFormValidator.disableSubmitButton(); //12May24 comment
     api
       .updateUserAvatar({ avatar })
       .then((res) => {
-        variables.avatarIcon.src = res.avatar;
+        user.updateAvatar(res.avatar);
         avatarPopupForm.close();
         variables.avatarModalForm.reset();
       })
       .catch((error) => {
         console.error("Failed to update user avatar:", error);
+        avatarFormValidator.enableSubmitButton(); //12May24 comment
       })
       .finally(() => {
         variables.avatarModalSaveButton.textContent = "Save";
+        avatarFormValidator.enableSubmitButton(); //12May24 comment
       });
-    addModalFormValidator.disableSubmitButton();
   }
 );
 
@@ -208,18 +244,24 @@ function createCard(card) {
 /*              Handle like/dislike functionality callback                    */
 /* -------------------------------------------------------------------------- */
 
-const likeCardAPI = (cardData) => {
+const likeCardAPI = (cardData, changeLike) => {
   api
     .likeCard(cardData)
-    .then(() => console.log("Card liked successfully."))
+    .then(() => {
+      changeLike.classList.toggle("element__like-button_active");
+      console.log("Card liked successfully.");
+    })
     .catch((error) => {
       console.error("Failed to like card:", error);
     });
 };
-const unlikeCardAPI = (cardData) => {
+const unlikeCardAPI = (cardData, changeLike) => {
   api
     .unlikeCard(cardData)
-    .then(() => console.log("Card disliked successfully."))
+    .then(() => {
+      changeLike.classList.toggle("element__like-button_active");
+      console.log("Card disliked successfully.");
+    })
     .catch((error) => {
       console.error("Failed to unlike card:", error);
     });
@@ -264,35 +306,3 @@ const handleImageClick = (cardData) => {
   popupImage.open(cardData);
 };
 popupImage.setEventListeners();
-
-/* -------------------------------------------------------------------------- */
-/*                  Pass form inputs to validate *Edit* form data             */
-/* -------------------------------------------------------------------------- */
-
-const profileEditFormValidator = new FormValidator(
-  formConfig,
-  //"#profile-edit-modal"
-  variables.profileEditModalForm
-);
-profileEditFormValidator.enableValidation();
-
-/* -------------------------------------------------------------------------- */
-/*                  Pass form inputs to validate *Add* form data              */
-/* -------------------------------------------------------------------------- */
-
-const addModalFormValidator = new FormValidator(
-  formConfig,
-  //"#profile-add-modal"
-  variables.addModalForm
-);
-addModalFormValidator.enableValidation();
-
-/* -------------------------------------------------------------------------- */
-/*                  Pass form inputs to validate *Avatar* form data           */
-/* -------------------------------------------------------------------------- */
-
-const avatarFormValidator = new FormValidator(
-  formConfig,
-  variables.avatarModalForm
-);
-avatarFormValidator.enableValidation();

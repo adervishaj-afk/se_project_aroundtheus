@@ -18,4 +18,8 @@ export default class UserInfo {
     this._jobElement.textContent = job;
     this._avatarIcon.src = avatar;
   }
+
+  updateAvatar(avatarUrl) {
+    this._avatarIcon.src = avatarUrl;
+  }
 }
