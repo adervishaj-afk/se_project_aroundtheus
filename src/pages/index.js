@@ -139,13 +139,13 @@ addModalFormValidator.enableValidation();
 
 function createNewCard(card) {
   variables.createCardButton.textContent = "Creating...";
-  addModalFormValidator.disableSubmitButton();
   api
     .createCard(card)
     .then((cardData) => {
       cardSection.addItem(createCard(cardData));
       addCardPopup.close();
       variables.addModalForm.reset();
+      addModalFormValidator.disableSubmitButton();
     })
     .catch((error) => {
       addModalFormValidator.enableSubmitButton();
@@ -200,10 +200,10 @@ const avatarPopupForm = new PopupWithForm(
         user.updateAvatar(res.avatar);
         avatarPopupForm.close();
         variables.avatarModalForm.reset();
+        avatarFormValidator.disableSubmitButton();
       })
       .catch((error) => {
         console.error("Failed to update user avatar:", error);
-        avatarFormValidator.disableSubmitButton();
       })
       .finally(() => {
         variables.avatarModalSaveButton.textContent = "Save";
