@@ -16,15 +16,20 @@
           src="<%=require('./images/logo.svg')%>"
           alt="logo image"
           class="header__logo"
+          id="avatar-icon"
         />
       </header>
       <main>
         <section class="profile page__section">
-          <img
-            src="<%=require('./images/jacques-cousteau.jpg')%>"
-            alt="avatar"
-            class="profile__image"
-          />
+          <div class="profile__avatar">
+            <img
+              src="<%=require('./images/jacques-cousteau.svg')%>"
+              alt="avatar"
+              class="profile__image"
+              id="user-avatar"
+            />
+            <button class="profile__avatar-overlay"></button>
+          </div>
           <div class="profile__info">
             <h1 class="profile__title" id="profile-info-title">
               Jacques-Cousteau
@@ -95,7 +100,14 @@
                 id="profile-edit-modal-description-error"
               ></span>
             </label>
-            <button type="submit" class="modal__button" disabled>Save</button>
+            <button
+              type="submit"
+              class="modal__button"
+              id="edit-profile-modal-save-button"
+              disabled
+            >
+              Save
+            </button>
           </form>
         </div>
       </div>
@@ -140,18 +152,14 @@
                 >Enter a valid URL address</span
               >
             </label>
-            <button
-              type="submit"
-              class="modal__button modal__button_disabled"
-              disabled
-            >
+            <button type="submit" class="modal__button modal__button_disabled">
               Create
             </button>
           </form>
         </div>
       </div>
 
-      <!-- Add Card Popout Modal-->
+      <!-- Image Popout Modal-->
 
       <div class="modal" id="element-popout-modal">
         <div class="modal__popout">
@@ -169,14 +177,59 @@
         </div>
       </div>
 
+      <div class="modal" id="delete-card-modal">
+        <div class="modal__container">
+          <button class="modal__close" id="cancel-delete"></button>
+          <label class="modal__label">
+            <p class="modal__title" id="">Are you sure?</p>
+            <p></p
+          ></label>
+
+          <button type="submit" class="modal__button" id="confirm-delete">
+            Yes
+          </button>
+        </div>
+      </div>
+
+      <!-- Avatar Change Popout Modal-->
+
+      <div class="modal" id="edit-avatar">
+        <div class="modal__container">
+          <button class="modal__close" id="cancel-avatar"></button>
+          <p class="modal__title">Change profile picture</p>
+          <form
+            name="profile-change-avatar"
+            class="modal__form"
+            id="modal-change-avatar-form"
+          >
+            <label class="modal__label">
+              <input
+                type="url"
+                id="edit-avatar-link"
+                name="link"
+                class="modal__form-input"
+                placeholder="avatar-link"
+                required
+              />
+              <span class="modal__error" id="edit-avatar-link-error"
+                >Enter a valid URL address</span
+              >
+            </label>
+            <button
+              type="submit"
+              class="modal__button modal__button_disabled"
+              id="avatar-modal-save-button"
+            >
+              Save
+            </button>
+          </form>
+        </div>
+      </div>
+
       <template id="elementCard">
         <li class="element">
           <img class="element__image" alt="" src="" id="el-card-image" />
-          <button
-            class="element__trash-button"
-            type="button"
-            id="element-trash-button"
-          ></button>
+          <button class="element__trash-button" type="button"></button>
           <div class="element__description" id="el-card-description">
             <h3 class="element__title" id="el-card-title"></h3>
             <button

@@ -1,8 +1,24 @@
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const addModal = document.querySelector("#profile-add-modal");
 const imageModal = document.querySelector("#element-popout-modal");
+const cardElement = document
+  .querySelector("#elementCard")
+  .content.querySelector(".element")
+  .cloneNode(true);
 
 export const variables = {
+  likeButton: cardElement.querySelector(".element__like-button"),
+  avatarChangeBut: document.querySelector(".profile__avatar-overlay"),
+  addModal: document.querySelector("#profile-add-modal"),
+  createCardButton: addModal.querySelector(".modal__button"),
+  cardsList: ".cards__list",
+  editModalProfileSaveButton: document.querySelector(
+    "#edit-profile-modal-save-button"
+  ),
+  avatarModalSaveButton: document.querySelector("#avatar-modal-save-button"),
+  confirmButton: document.querySelector("#confirm-delete"),
+  avatarModalForm: document.querySelector("#modal-change-avatar-form"),
+  avatarIcon: document.querySelector("#user-avatar"),
   profileEditButton: document.querySelector("#profile-edit-button"),
   profileCloseEditButton: document.querySelector("#profile-close-edit-button"),
   profileInfoTitle: document.querySelector("#profile-info-title"),
@@ -33,72 +49,3 @@ export const formConfig = {
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
 };
-
-export const data = [
-  {
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-  },
-
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
-
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-  },
-
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-  },
-
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-  },
-
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-  },
-];
-
-/*
-export const editButtonConfig = {
-  profileEditButton: "#profile-edit-button",
-  profileEditModal: "#profile-edit-modal",
-  profileCloseEditButton: "#profile-close-edit-button",
-  profileInfoTitle: "#profile-info-title",
-  profileInfoDescription: "#profile-info-description",
-};
-
-export const addButtonConfig = {
-  addButton: "#profile-add-button",
-  addModal: "#profile-add-modal",
-  closeAddButton: "#profile-close-add-button",
-  addModalForm: "#modal-profile-add-form",
-  addTitleInput: "#profile-modal-add-title",
-  addUrlInput: "#profile-modal-add-URL",
-};
-
-export const popupModalFormConfig = {
-  editFormPopupSelector: "#profile-edit-modal",
-  addFormPopupSelector: "#profile-add-modal",
-  profileModalNameInput: "#profile-edit-modal-title",
-  profileModalDescriptionInput: "#profile-edit-modal-description",
-  profileEditModalForm: "#modal-profile-edit-form",
-};
-
-export const popupCardConfig = {
-  cardList: "#el-card-list",
-  imageModal: "#element-popout-modal",
-  modalImage: "#modal-image",
-  modalTitle: "#modal-text",
-  imageCloseButton: imageModal.querySelector("#element-close-popout-button"),
-  containerSelector: "#el-card-list",
-};
-
-*/
